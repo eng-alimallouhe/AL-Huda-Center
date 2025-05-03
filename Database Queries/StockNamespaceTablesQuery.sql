@@ -1,0 +1,114 @@
+USE HudaCenterDB
+GO
+
+CREATE TABLE [Categories] (
+    [CategoryId] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    [CategoryName] NVARCHAR(255) NOT NULL,
+    [CategoryDescription] NVARCHAR(MAX) NOT NULL,
+    [IsActive] BIT NOT NULL DEFAULT 1,
+    [CreatedAt] DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    [UpdatedAt] DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME()
+);
+GO
+
+CREATE TABLE [Authors] (
+    [AuthorId] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    [AuthorName] NVARCHAR(255) NOT NULL,
+    [AuthorDescription] NVARCHAR(MAX) NOT NULL,
+    [IsActive] BIT NOT NULL DEFAULT 1,
+    [CreatedAt] DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    [UpdatedAt] DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME()
+);
+GO
+
+CREATE TABLE [Genres] (
+    [GenreId] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    [GenreName] NVARCHAR(255) NOT NULL,
+    [GenreDescription] NVARCHAR(MAX) NOT NULL,
+    [IsActive] BIT NOT NULL DEFAULT 1,
+    [CreatedAt] DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    [UpdatedAt] DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME()
+);
+GO
+
+CREATE TABLE [Publishers] (
+    [PublisherId] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    [PublisherName] NVARCHAR(255) NOT NULL,
+    [PublisherDescription] NVARCHAR(MAX) NOT NULL,
+    [IsActive] BIT NOT NULL DEFAULT 1,
+    [CreatedAt] DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    [UpdatedAt] DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME()
+);
+GO
+
+CREATE TABLE [Suppliers] (
+    [SupplierId] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    [SupplierName] NVARCHAR(255) NOT NULL,
+    [ContactPhone] NVARCHAR(50) NOT NULL,
+    [ContactEmail] NVARCHAR(255) NOT NULL,
+    [IsActive] BIT NOT NULL DEFAULT 1,
+    [CreatedAt] DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    [UpdatedAt] DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME()
+);
+GO
+
+CREATE TABLE [Purchases] (
+    [PurchaseId] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    [SupplierId] UNIQUEIDENTIFIER NOT NULL,
+    [PurchaseDate] DATETIME2 NOT NULL,
+    [TotalAmount] DECIMAL(18, 2) NOT NULL,
+    [CurrencyCode] NVARCHAR(10) NOT NULL,
+    [Notes] NVARCHAR(MAX) NOT NULL,
+    [IsActive] BIT NOT NULL DEFAULT 1,
+    [CreatedAt] DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    [UpdatedAt] DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    CONSTRAINT [FK_Purchases_Suppliers] FOREIGN KEY ([SupplierId]) REFERENCES [Suppliers]([SupplierId])
+);
+GO
+
+CREATE TABLE [Products] (
+    [ProductId] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    [ProductName] NVARCHAR(255) NOT NULL,
+    [ProductDescription] NVARCHAR(MAX) NOT NULL,
+    [ProductPrice] DECIMAL(18, 2) NOT NULL,
+    [ProductStock] INT NOT NULL,
+    [ImgUrl] NVARCHAR(MAX) NOT NULL,
+    [IsActive] BIT NOT NULL DEFAULT 1,
+    [CreatedAt] DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+    [UpdatedAt] DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME()
+);
+GO
+
+CREATE TABLE [Books] (
+    [ProductId] UNIQUEIDENTIFIER PRIMARY KEY, -- FK from Products
+    [GenreId] UNIQUEIDENTIFIER NOT NULL,
+    [AuthorId] UNIQUEIDENTIFIER NOT NULL,
+    [ISBN] NVARCHAR(50) NOT NULL,
+    [Pages] INT NOT NULL,
+    [RentalCost] DECIMAL(18,2) NOT NULL,
+    [PublishedYear] INT NOT NULL,
+    CONSTRAINT [FK_Books_Products] FOREIGN KEY ([ProductId]) REFERENCES [Products]([ProductId]),
+    CONSTRAINT [FK_Books_Genres] FOREIGN KEY ([GenreId]) REFERENCES [Genres]([GenreId]),
+    CONSTRAINT [FK_Books_Authors] FOREIGN KEY ([AuthorId]) REFERENCES [Authors]([AuthorId])
+);
+GO
+
+
+CREATE TABLE [BookPublishers] (
+    [BookId] UNIQUEIDENTIFIER NOT NULL,
+    [PublisherId] UNIQUEIDENTIFIER NOT NULL,
+    CONSTRAINT [PK_BookPublishers] PRIMARY KEY ([BookId], [PublisherId]),
+    CONSTRAINT [FK_BookPublishers_Books] FOREIGN KEY ([BookId]) REFERENCES [Books]([ProductId]),
+    CONSTRAINT [FK_BookPublishers_Publishers] FOREIGN KEY ([PublisherId]) REFERENCES [Publishers]([PublisherId])
+);
+GO
+
+
+CREATE TABLE [ProductCategories] (
+    [ProductId] UNIQUEIDENTIFIER NOT NULL,
+    [CategoryId] UNIQUEIDENTIFIER NOT NULL,
+    CONSTRAINT [PK_ProductCategories] PRIMARY KEY ([ProductId], [CategoryId]),
+    CONSTRAINT [FK_ProductCategories_Products] FOREIGN KEY ([ProductId]) REFERENCES [Products]([ProductId]),
+    CONSTRAINT [FK_ProductCategories_Categories] FOREIGN KEY ([CategoryId]) REFERENCES [Categories]([CategoryId])
+);
+GO
