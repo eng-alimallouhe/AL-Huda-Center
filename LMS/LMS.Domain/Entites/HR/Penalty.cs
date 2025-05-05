@@ -1,0 +1,31 @@
+﻿using LMS.Domain.Entites.Users;
+
+namespace LMS.Domain.Entites.HR
+{
+    public class Penalty
+    {
+        //primary key
+        public Guid PenaltyId { get; set; }
+
+
+        //Foreign Key: EmployeeId ==> one(employee)-to-many(penalties) relationship
+        public Guid EmployeeId { get; set; }
+
+
+        public decimal Amount { get; set; }
+        public string DecisionFileUrl { get; set; } = string.Empty;
+        public string Reason { get; set; } = string.Empty;
+        public DateTime Date { get; set; }
+
+
+        //Soft delete
+        public bool IsActive { get; set; }
+
+        
+        public Penalty()
+        {
+            PenaltyId = Guid.NewGuid();
+            IsActive = true;
+        }
+    }
+}
