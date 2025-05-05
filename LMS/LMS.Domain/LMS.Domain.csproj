@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Enums\Orders\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
 
