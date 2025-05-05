@@ -6,6 +6,10 @@
         public Guid UserId { get; set; }
 
 
+        //Foreign Key: RoleId ==> one(role)-to-many(user) relationship
+        public Guid RoleId { get; set; }
+
+
         public required string FullName { get; set; }
         public required string UserName { get; set; }
         public required string Email { get; set; }
@@ -31,6 +35,7 @@
 
 
         //Navigation Property:
+        public Role Role { get; set; }
         public ICollection<Notification> Notifications { get; set; }
         public ICollection<OtpCode> OtpCodes { get; set; }
         public ICollection<Address> Addresses { get; set; }
@@ -40,6 +45,7 @@
         public User()
         {
             UserId = Guid.NewGuid();
+            Role = null!;
             IsBlocked = false;
             IsLocked = false;
             IsEmailConfirmed = false;

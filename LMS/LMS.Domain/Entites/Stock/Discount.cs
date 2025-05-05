@@ -1,0 +1,31 @@
+﻿namespace LMS.Domain.Entites.Stock
+{
+    public class Discount
+    {
+        // Primary key:
+        public Guid DiscountId { get; set; }
+
+
+        //Foreign Key: ProductId ==> one(product)-to-many(discount) relationship
+        public Guid ProductId { get; set; }
+
+
+        public decimal DiscountPercentage { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public bool IsActive { get; set; }
+
+
+        //Timestamp:
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+
+
+        public Discount()
+        {
+            IsActive = true;
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+        }
+    }
+}
