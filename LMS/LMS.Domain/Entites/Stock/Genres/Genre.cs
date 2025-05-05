@@ -1,13 +1,11 @@
-﻿namespace LMS.Domain.Entites.Stock
+﻿using LMS.Domain.Entites.Stock.Products;
+
+namespace LMS.Domain.Entites.Stock.Genres
 {
     public class Genre
     {
         // Primary key:
         public Guid GenreId { get; set; }
-
-
-        public required string GenreName { get; set; }
-        public required string GenreDescription { get; set; }
 
 
         //soft delete
@@ -21,12 +19,15 @@
 
         // Navigation property:
         public ICollection<Book> Books { get; set; }
+        public ICollection<GenreTranslation> Translations { get; set; }
+
 
         public Genre()
         {
             GenreId = Guid.NewGuid();
             IsActive = true;
             Books = [];
+            Translations = [];
         }
     }
 }

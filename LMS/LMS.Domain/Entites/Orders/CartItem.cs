@@ -1,4 +1,5 @@
 ﻿using LMS.Domain.Entites.Stock;
+using LMS.Domain.Entites.Stock.Products;
 
 namespace LMS.Domain.Entites.Orders
 {

@@ -16,6 +16,7 @@ namespace LMS.Domain.Entites.Users
         public required string Message { get; set; }
         public DateTime NotificationDate { get; set; }
         public bool IsRead { get; set; }
+        public DateTime CreatedAt { get; set; }
         public DateTime? ReadAt { get; set; }
         public string RedirectUrl { get; set; }
         public NotificationType NotificationType { get; set; }
@@ -26,6 +27,7 @@ namespace LMS.Domain.Entites.Users
         public Notification()
         {
             NotificationId = Guid.NewGuid();
+            CreatedAt = DateTime.UtcNow;
             IsRead = false;
             NotificationDate = DateTime.UtcNow;
             RedirectUrl = string.Empty;

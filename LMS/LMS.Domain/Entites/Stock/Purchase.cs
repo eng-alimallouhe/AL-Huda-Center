@@ -16,6 +16,7 @@
         public string? Notes { get; set; }
         public string PurchaseImgUrl { get; set; }
 
+
         //soft delete
         public bool IsActive { get; set; }
 

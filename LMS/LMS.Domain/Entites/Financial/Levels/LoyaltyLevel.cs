@@ -1,6 +1,6 @@
 ﻿using LMS.Domain.Entites.Users;
 
-namespace LMS.Domain.Entities.Financial
+namespace LMS.Domain.Entites.Financial.Levels
 {
     public class LoyaltyLevel
     {
@@ -8,10 +8,9 @@ namespace LMS.Domain.Entities.Financial
         public Guid LevelId { get; set; }
 
 
-        public string LevelName { get; set; } = string.Empty;
+
         public int RequiredPoints { get; set; }
         public decimal DiscountPercentage { get; set; }
-        public string LevelDescription { get; set; } = string.Empty;
         public decimal PointPerDolar { get; set; }
 
 
@@ -26,6 +25,7 @@ namespace LMS.Domain.Entities.Financial
 
         //navigation property:
         public ICollection<Customer> Customers { get; set; }
+        public ICollection<LoyaltyLevelTranslation> Translations { get; set; }
 
 
         public LoyaltyLevel()
@@ -34,7 +34,8 @@ namespace LMS.Domain.Entities.Financial
             IsActive = true;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
-            Customers =  new List<Customer>();
+            Customers =  [];
+            Translations = [];
         }
     }
 }

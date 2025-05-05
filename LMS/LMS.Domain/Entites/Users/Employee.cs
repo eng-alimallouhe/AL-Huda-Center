@@ -1,6 +1,6 @@
-﻿using LMS.Domain.Entites.HR;
+﻿using LMS.Domain.Entites.Financial;
+using LMS.Domain.Entites.HR;
 using LMS.Domain.Entites.Orders;
-using LMS.Domain.Entities.Financial;
 
 namespace LMS.Domain.Entites.Users
 {

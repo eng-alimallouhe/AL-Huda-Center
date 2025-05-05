@@ -1,4 +1,5 @@
-﻿using LMS.Domain.Enums.Stock;
+﻿using LMS.Domain.Entites.Stock.Products;
+using LMS.Domain.Enums.Stock;
 
 namespace LMS.Domain.Entites.Stock
 {

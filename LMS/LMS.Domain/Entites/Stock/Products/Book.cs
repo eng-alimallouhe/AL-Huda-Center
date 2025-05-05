@@ -1,4 +1,8 @@
-﻿namespace LMS.Domain.Entites.Stock
+﻿using LMS.Domain.Entites.Stock.Authors;
+using LMS.Domain.Entites.Stock.Genres;
+using LMS.Domain.Entites.Stock.Publishers;
+
+namespace LMS.Domain.Entites.Stock.Products
 {
     public class Book : Product
     {

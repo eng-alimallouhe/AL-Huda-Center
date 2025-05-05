@@ -2,7 +2,7 @@
 using LMS.Domain.Enums.Financial;
 using LMS.Domain.Enums.Orders;
 
-namespace LMS.Domain.Entities.Financial
+namespace LMS.Domain.Entites.Financial
 {
     public class FinancialRevenue
     {

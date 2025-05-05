@@ -1,13 +1,11 @@
-﻿namespace LMS.Domain.Entites.Stock
+﻿using LMS.Domain.Entites.Stock.Products;
+
+namespace LMS.Domain.Entites.Stock.Categories
 {
     public class Category
     {
         //Primary key:
         public Guid CategoryId { get; set; }
-
-
-        public required string CategoryName { get; set; }
-        public required string CategoryDescription { get; set; }
 
         
         //soft delete: 
@@ -21,6 +19,7 @@
 
         //Navigation property:
         public ICollection<Product> Products { get; set; }
+        public ICollection<CategoryTranslation> Translations { get; set; }
 
 
         public Category()
@@ -30,6 +29,7 @@
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
             Products = [];
+            Translations = [];
         }
     }
 }

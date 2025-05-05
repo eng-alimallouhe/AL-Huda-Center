@@ -1,13 +1,11 @@
-﻿namespace LMS.Domain.Entites.Stock
+﻿using LMS.Domain.Entites.Stock.Products;
+
+namespace LMS.Domain.Entites.Stock.Publishers
 {
     public class Publisher
     {
         // Primary key:
         public Guid PublisherId { get; set; }
-
-
-        public required string PublisherName { get; set; }
-        public required string PublisherDescription { get; set; }
 
 
         //soft delete
@@ -21,6 +19,7 @@
 
         // Navigation property:
         public ICollection<Book> Books { get; set; }
+        public ICollection<PublisherTranslation> Translations { get; set; }
 
 
         public Publisher()
@@ -30,6 +29,7 @@
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
             Books = [];
+            Translations = [];
         }
     }
 }

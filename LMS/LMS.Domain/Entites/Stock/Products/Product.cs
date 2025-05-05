@@ -1,12 +1,13 @@
-﻿namespace LMS.Domain.Entites.Stock
+﻿using LMS.Domain.Entites.Stock.Categories;
+
+namespace LMS.Domain.Entites.Stock.Products
 {
     public class Product
     {
         // Primary key:
         public Guid ProductId { get; set; }
 
-        public required string ProductName { get; set; }
-        public required string ProductDescription { get; set; }
+
         public decimal ProductPrice { get; set; }
         public int ProductStock { get; set; }
         public string ImgUrl { get; set; }
@@ -25,6 +26,7 @@
         public ICollection<Category> Categories { get; set; }
         public ICollection<Discount> Discounts { get; set; }
         public ICollection<InventoryLog> Logs { get; set; }
+        public ICollection<ProductTranslation> Translations { get; set; }
 
 
         public Product()
@@ -37,6 +39,7 @@
             Categories = [];
             Discounts = [];
             Logs = [];
+            Translations = [];
         }
     }
 }
