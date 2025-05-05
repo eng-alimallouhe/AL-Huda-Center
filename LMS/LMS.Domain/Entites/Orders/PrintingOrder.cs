@@ -1,0 +1,19 @@
+﻿namespace LMS.Domain.Entites.Orders
+{
+    public class PrintingOrder : Order
+    {
+        public int StartPage { get; set; }
+        public int EndPage { get; set; }
+        public int CopiesCount { get; set; }
+        public decimal CopyCost { get; set; }
+        public string FileUrl { get; set; }
+        public string FileName { get; set; }
+
+        public PrintingOrder()
+        {
+            CopiesCount = 1;
+            FileUrl = string.Empty;
+            FileName = string.Empty;
+        }
+    }
+}
