@@ -1,4 +1,7 @@
-﻿namespace LMS.Domain.Entites.Users
+﻿using LMS.Domain.Entites.Orders;
+using LMS.Domain.Entities.Financial;
+
+namespace LMS.Domain.Entites.Users
 {
     public class Department
     {
@@ -21,7 +24,9 @@
        
         //navigation property:
         public ICollection<EmployeeDepartment> EmployeeDepartments { get; set; }
-
+        public ICollection<BaseOrder> Orders { get; set; }
+        public ICollection<Shipment> Shipments { get; set; }
+        public ICollection<FinancialRevenue> Revenues { get; set; }
 
         public Department()
         {
@@ -30,6 +35,9 @@
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
             EmployeeDepartments = [];
+            Orders = [];
+            Shipments = [];
+            Revenues = [];
         }
     }
 }

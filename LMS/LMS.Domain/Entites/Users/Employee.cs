@@ -1,4 +1,6 @@
 ﻿using LMS.Domain.Entites.HR;
+using LMS.Domain.Entites.Orders;
+using LMS.Domain.Entities.Financial;
 
 namespace LMS.Domain.Entites.Users
 {
@@ -15,6 +17,9 @@ namespace LMS.Domain.Entites.Users
         public ICollection<Penalty> Penalties { get; set; }
         public ICollection<Leave> Leaves { get; set; }
         public ICollection<Salary> Salaries { get; set; }
+        public ICollection<BaseOrder> Orders { get; set; }
+        public ICollection<Shipment> Shipments { get; set; }
+        public ICollection<FinancialRevenue> Revenues { get; set; }
         public LeaveBalance LeaveBalance { get; set; }
 
         public Employee()
@@ -25,6 +30,9 @@ namespace LMS.Domain.Entites.Users
             Penalties = [];
             Leaves = [];
             Salaries = [];
+            Orders = [];
+            Shipments = [];
+            Revenues = [];
             LeaveBalance = null!;
         }
     }
