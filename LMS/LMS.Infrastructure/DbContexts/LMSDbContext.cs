@@ -1,18 +1,28 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-using LMS.Domain.Entites.Users;
+﻿using LMS.Domain.Entites.Financial;
+using LMS.Domain.Entites.Financial.Levels;
 using LMS.Domain.Entites.HR;
 using LMS.Domain.Entites.Orders;
 using LMS.Domain.Entites.Stock;
-using LMS.Domain.Entities.Financial;
-using System;
-using LMS.Domain.Entites.Stock.Products;
 using LMS.Domain.Entites.Stock.Authors;
-using LMS.Domain.Entites.Stock.Genres;
-using LMS.Domain.Entites.Stock.Publishers;
-using LMS.Domain.Entites.Financial;
-using LMS.Domain.Entites.Financial.Levels;
 using LMS.Domain.Entites.Stock.Categories;
+using LMS.Domain.Entites.Stock.Genres;
+using LMS.Domain.Entites.Stock.Products;
+using LMS.Domain.Entites.Stock.Publishers;
+using LMS.Domain.Entites.Users;
+using LMS.Domain.Entities.Financial;
+using LMS.Infrastructure.Configurations.EmployeesManagement;
+using LMS.Infrastructure.Configurations.Financial.Levels;
+using LMS.Infrastructure.Configurations.Financial;
+using LMS.Infrastructure.Configurations.HR;
+using LMS.Infrastructure.Configurations.Orders;
+using LMS.Infrastructure.Configurations.Stock.Authors;
+using LMS.Infrastructure.Configurations.Stock.Genres;
+using LMS.Infrastructure.Configurations.Stock.Products;
+using LMS.Infrastructure.Configurations.Stock.Publishers;
+using LMS.Infrastructure.Configurations.Stock;
+using LMS.Infrastructure.Configurations.Users;
+using LMS.Infrastructure.Configurations.UsersManagement;
+using Microsoft.EntityFrameworkCore;
 
 namespace LMS.Infrastructure.DbContexts
 {
@@ -77,7 +87,68 @@ namespace LMS.Infrastructure.DbContexts
         public DbSet<FinancialRevenue> FinancialRevenues { get; set; }
 
 
+
+
         public LMSDbContext(DbContextOptions<LMSDbContext> options) : base(options)
         { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+
+            //Users Namespace: 
+            modelBuilder.ApplyConfiguration(new UserConfigurations());
+            modelBuilder.ApplyConfiguration(new RoleConfigurations());
+            modelBuilder.ApplyConfiguration(new EmployeeConfigurations());
+            modelBuilder.ApplyConfiguration(new AddressConfigurations());
+            modelBuilder.ApplyConfiguration(new DepartmentConfigurations());
+            modelBuilder.ApplyConfiguration(new EmployeeDepartmentConfigurations());
+            modelBuilder.ApplyConfiguration(new OtpConfigurations());
+            modelBuilder.ApplyConfiguration(new CustomerConfigurations());
+            modelBuilder.ApplyConfiguration(new NotificationConfigurations());
+
+
+            //Stock Namespace: 
+            modelBuilder.ApplyConfiguration(new SupplierConfigurations());
+            modelBuilder.ApplyConfiguration(new PurchaseConfigurations());
+            modelBuilder.ApplyConfiguration(new DiscountConfigurations());
+            modelBuilder.ApplyConfiguration(new InventoryLogConfigurations());
+            modelBuilder.ApplyConfiguration(new GenreConfigurations());
+            modelBuilder.ApplyConfiguration(new GenreTranslationConfigurations());
+            modelBuilder.ApplyConfiguration(new PublisherConfigurations());
+            modelBuilder.ApplyConfiguration(new PublisherTranslationConfigurations());
+            modelBuilder.ApplyConfiguration(new ProductConfigurations());
+            modelBuilder.ApplyConfiguration(new ProductTranslationConfigurations());
+            modelBuilder.ApplyConfiguration(new BookConfigurations());
+            modelBuilder.ApplyConfiguration(new AuthorConfigurations());
+            modelBuilder.ApplyConfiguration(new AuthorTranslationsConfigurations());
+            
+
+            //Orders Namespace: 
+            modelBuilder.ApplyConfiguration(new OrderConfigurations());
+            modelBuilder.ApplyConfiguration(new PrintOrderConfigurations());
+            modelBuilder.ApplyConfiguration(new OrderItemConfigurations());
+            modelBuilder.ApplyConfiguration(new BaseOrderConfigurations());
+            modelBuilder.ApplyConfiguration(new ShipmentConfigurations());
+            modelBuilder.ApplyConfiguration(new CartItemConfigurations());
+            modelBuilder.ApplyConfiguration(new CartConfigurations());
+
+            
+            //HR Namespace:
+            modelBuilder.ApplyConfiguration(new SalaryConfigurations());
+            modelBuilder.ApplyConfiguration(new PenaltyConfigurations());
+            modelBuilder.ApplyConfiguration(new LeaveConfigurations());
+            modelBuilder.ApplyConfiguration(new LeaveBalanceConfigurations());
+            modelBuilder.ApplyConfiguration(new IncentiveConfigurations());
+            modelBuilder.ApplyConfiguration(new AttendanceConfigurations());
+
+           
+            //Financial Namespace: 
+            modelBuilder.ApplyConfiguration(new PaymentConfigurations());
+            modelBuilder.ApplyConfiguration(new LevelConfigurations());
+            modelBuilder.ApplyConfiguration(new LevelTranslationConfigurations());
+            modelBuilder.ApplyConfiguration(new FinancialRevenueConfigurations());
+        }
     }
 }

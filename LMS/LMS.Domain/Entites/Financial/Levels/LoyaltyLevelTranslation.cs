@@ -1,4 +1,6 @@
-﻿namespace LMS.Domain.Entites.Financial.Levels
+﻿using LMS.Domain.Enums.Commons;
+
+namespace LMS.Domain.Entites.Financial.Levels
 {
     public class LoyaltyLevelTranslation
     {
@@ -8,7 +10,7 @@
         //Foreign key: levelId ==> one(level)--to--many(levelTranslation)
         public Guid LevelId { get; set; }
 
-
+        public Language Language { get; set; }
         public string LevelName { get; set; }
         public string LevelDescription { get; set; }
 

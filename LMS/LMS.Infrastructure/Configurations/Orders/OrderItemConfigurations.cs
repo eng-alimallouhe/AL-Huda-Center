@@ -1,4 +1,4 @@
-﻿using LMS.Domain.Entities.Orders;
+﻿using LMS.Domain.Entites.Orders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,24 +11,27 @@ namespace LMS.Infrastructure.Configurations.Orders
         {
             builder.ToTable("OrderItems");
 
+            
             builder.HasKey(oi => oi.OrderItemId);
+            
             
             builder.Property(oi => oi.OrderItemId)
                     .ValueGeneratedOnAdd();
             
+            
             builder.Property(oi => oi.Quantity)
                     .IsRequired();
+            
             
             builder.Property(oi => oi.UnitPrice)
                     .HasColumnType("decimal(7, 2)");
             
-            builder.Property(oi => oi.Discount)
+            
+            builder.Property(oi => oi.DiscountPercentage)
                     .HasColumnType("decimal(7, 2)")
                     .IsRequired();
             
-            builder.Property(oi => oi.TotalPrice)
-                    .HasColumnType("decimal(7, 2)");
-            
+
             builder.Property(oi => oi.IsActive)
                     .IsRequired();
             
@@ -38,7 +41,7 @@ namespace LMS.Infrastructure.Configurations.Orders
             builder.Property(oi => oi.UpdatedAt)
                     .IsRequired();
             
-            builder.HasOne(oi => oi.SellOrder)
+            builder.HasOne(oi => oi.Order)
                 .WithMany(so => so.OrderItems)
                 .HasForeignKey(oi => oi.SellOrderId);
             
