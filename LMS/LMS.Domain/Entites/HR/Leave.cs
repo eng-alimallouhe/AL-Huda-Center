@@ -1,6 +1,6 @@
 ﻿using LMS.Domain.Enums.HR;
 
-namespace LMS.Domain.Entites.HR
+namespace LMS.Domain.Entities.HR
 {
     public class Leave
     {

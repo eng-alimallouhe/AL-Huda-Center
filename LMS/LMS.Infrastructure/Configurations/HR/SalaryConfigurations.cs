@@ -1,4 +1,4 @@
-﻿using LMS.Domain.Entites.HR;
+﻿using LMS.Domain.Entities.HR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

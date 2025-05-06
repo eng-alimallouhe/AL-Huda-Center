@@ -1,6 +1,6 @@
 ﻿using LMS.Domain.Enums.Commons;
 
-namespace LMS.Domain.Entites.Stock.Authors
+namespace LMS.Domain.Entities.Stock.Authors
 {
     public class AuthorTranslation
     {

@@ -1,6 +1,6 @@
-﻿using LMS.Domain.Entites.Stock.Products;
+﻿using LMS.Domain.Entities.Stock.Products;
 
-namespace LMS.Domain.Entites.Stock.Categories
+namespace LMS.Domain.Entities.Stock.Categories
 {
     public class Category
     {

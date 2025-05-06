@@ -1,4 +1,4 @@
-﻿using LMS.Domain.Entites.Orders;
+﻿using LMS.Domain.Entities.Orders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

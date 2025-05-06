@@ -1,4 +1,4 @@
-﻿namespace LMS.Domain.Entites.Orders
+﻿namespace LMS.Domain.Entities.Orders
 {
     public class PrintingOrder : Order
     {

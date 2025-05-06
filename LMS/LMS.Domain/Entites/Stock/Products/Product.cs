@@ -1,7 +1,7 @@
-﻿using LMS.Domain.Entites.Orders;
-using LMS.Domain.Entites.Stock.Categories;
+﻿using LMS.Domain.Entities.Orders;
+using LMS.Domain.Entities.Stock.Categories;
 
-namespace LMS.Domain.Entites.Stock.Products
+namespace LMS.Domain.Entities.Stock.Products
 {
     public class Product
     {

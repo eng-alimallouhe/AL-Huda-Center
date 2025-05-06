@@ -1,6 +1,6 @@
 ﻿using LMS.Domain.Enums.Commons;
 
-namespace LMS.Domain.Entites.Financial.Levels
+namespace LMS.Domain.Entities.Financial.Levels
 {
     public class LoyaltyLevelTranslation
     {

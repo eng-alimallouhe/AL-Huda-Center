@@ -1,8 +1,8 @@
-﻿using LMS.Domain.Entites.Users;
+﻿using LMS.Domain.Entities.Users;
 using LMS.Domain.Enums.Financial;
 using LMS.Domain.Enums.Orders;
 
-namespace LMS.Domain.Entites.Financial
+namespace LMS.Domain.Entities.Financial
 {
     public class FinancialRevenue
     {

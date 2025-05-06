@@ -1,6 +1,6 @@
-﻿using LMS.Domain.Entites.Users;
+﻿using LMS.Domain.Entities.Users;
 
-namespace LMS.Domain.Entites.HR
+namespace LMS.Domain.Entities.HR
 {
     public class Incentive
     {

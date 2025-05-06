@@ -1,4 +1,4 @@
-﻿namespace LMS.Domain.Entites.Stock.Products
+﻿namespace LMS.Domain.Entities.Stock.Products
 {
     public class ProductTranslation
     {

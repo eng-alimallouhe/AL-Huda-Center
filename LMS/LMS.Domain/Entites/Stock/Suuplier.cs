@@ -1,4 +1,4 @@
-﻿namespace LMS.Domain.Entites.Stock
+﻿namespace LMS.Domain.Entities.Stock
 {
     public class Supplier
     {

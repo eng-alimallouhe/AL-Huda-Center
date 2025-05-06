@@ -1,8 +1,8 @@
-﻿using LMS.Domain.Entites.Stock.Authors;
-using LMS.Domain.Entites.Stock.Genres;
-using LMS.Domain.Entites.Stock.Publishers;
+﻿using LMS.Domain.Entities.Stock.Authors;
+using LMS.Domain.Entities.Stock.Genres;
+using LMS.Domain.Entities.Stock.Publishers;
 
-namespace LMS.Domain.Entites.Stock.Products
+namespace LMS.Domain.Entities.Stock.Products
 {
     public class Book : Product
     {

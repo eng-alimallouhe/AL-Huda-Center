@@ -2,7 +2,7 @@
 
 namespace LMS.Domain.Interfaces
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface ISoftDeletableRepository<TEntity>
     {
         Task<ICollection<TEntity>> GetAllAsync(ISpecification<TEntity> specification);
 
@@ -20,12 +20,11 @@ namespace LMS.Domain.Interfaces
 
         Task UpdateAsync(TEntity entity);
 
-
-        Task HardDeleteAsync(Guid id);
-
-
+        
         Task SoftDeleteAsync(Guid id);
 
+
+        Task HardDeleteAsync(Guid id);
 
         Task SaveChangesAsync();
     }

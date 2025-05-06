@@ -1,6 +1,6 @@
 ﻿using LMS.Domain.Enums.Users;
 
-namespace LMS.Domain.Entites.Users
+namespace LMS.Domain.Entities.Users
 {
     public class OtpCode
     {

@@ -1,7 +1,7 @@
-﻿using LMS.Domain.Entites.Stock.Products;
+﻿using LMS.Domain.Entities.Stock.Products;
 using LMS.Domain.Enums.Stock;
 
-namespace LMS.Domain.Entites.Stock
+namespace LMS.Domain.Entities.Stock
 {
     public class InventoryLog
     {

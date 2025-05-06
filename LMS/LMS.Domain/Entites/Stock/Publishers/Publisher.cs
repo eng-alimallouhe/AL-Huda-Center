@@ -1,6 +1,6 @@
-﻿using LMS.Domain.Entites.Stock.Products;
+﻿using LMS.Domain.Entities.Stock.Products;
 
-namespace LMS.Domain.Entites.Stock.Publishers
+namespace LMS.Domain.Entities.Stock.Publishers
 {
     public class Publisher
     {

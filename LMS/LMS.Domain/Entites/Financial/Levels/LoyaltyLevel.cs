@@ -1,6 +1,6 @@
-﻿using LMS.Domain.Entites.Users;
+﻿using LMS.Domain.Entities.Users;
 
-namespace LMS.Domain.Entites.Financial.Levels
+namespace LMS.Domain.Entities.Financial.Levels
 {
     public class LoyaltyLevel
     {

@@ -1,4 +1,4 @@
-﻿using LMS.Domain.Entites.Financial;
+﻿using LMS.Domain.Entities.Financial;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,4 +1,4 @@
-﻿using LMS.Domain.Entites.Stock.Authors;
+﻿using LMS.Domain.Entities.Stock.Authors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

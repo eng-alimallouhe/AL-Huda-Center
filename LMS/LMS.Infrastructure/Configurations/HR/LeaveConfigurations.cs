@@ -1,5 +1,5 @@
-﻿using LMS.Domain.Entites.HR;
-using LMS.Domain.Entites.Users;
+﻿using LMS.Domain.Entities.HR;
+using LMS.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

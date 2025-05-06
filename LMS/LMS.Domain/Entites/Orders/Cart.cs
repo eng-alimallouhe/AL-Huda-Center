@@ -1,6 +1,6 @@
-﻿using LMS.Domain.Entites.Users;
+﻿using LMS.Domain.Entities.Users;
 
-namespace LMS.Domain.Entites.Orders
+namespace LMS.Domain.Entities.Orders
 {
     public class Cart
     {

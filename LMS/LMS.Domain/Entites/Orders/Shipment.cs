@@ -1,7 +1,7 @@
-﻿using LMS.Domain.Entites.Users;
+﻿using LMS.Domain.Entities.Users;
 using LMS.Domain.Enums.Orders;
 
-namespace LMS.Domain.Entites.Orders
+namespace LMS.Domain.Entities.Orders
 {
     public class Shipment
     {

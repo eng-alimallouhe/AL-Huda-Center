@@ -1,4 +1,4 @@
-﻿namespace LMS.Domain.Entites.Users
+﻿namespace LMS.Domain.Entities.Users
 {
     public class EmployeeDepartment
     {

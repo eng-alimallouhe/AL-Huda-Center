@@ -1,6 +1,6 @@
-﻿using LMS.Domain.Entites.Stock.Products;
+﻿using LMS.Domain.Entities.Stock.Products;
 
-namespace LMS.Domain.Entites.Orders
+namespace LMS.Domain.Entities.Orders
 {
     public class OrderItem
     {

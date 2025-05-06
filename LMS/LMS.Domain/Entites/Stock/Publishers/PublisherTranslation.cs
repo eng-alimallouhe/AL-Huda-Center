@@ -1,6 +1,6 @@
 ﻿using LMS.Domain.Enums.Commons;
 
-namespace LMS.Domain.Entites.Stock.Publishers
+namespace LMS.Domain.Entities.Stock.Publishers
 {
     public class PublisherTranslation
     {

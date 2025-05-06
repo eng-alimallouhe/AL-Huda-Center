@@ -1,7 +1,7 @@
-﻿using LMS.Domain.Entites.Financial;
-using LMS.Domain.Entites.Orders;
+﻿using LMS.Domain.Entities.Financial;
+using LMS.Domain.Entities.Orders;
 
-namespace LMS.Domain.Entites.Users
+namespace LMS.Domain.Entities.Users
 {
     public class Department
     {

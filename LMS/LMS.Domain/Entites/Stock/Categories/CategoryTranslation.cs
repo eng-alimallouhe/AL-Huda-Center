@@ -1,7 +1,7 @@
-﻿using LMS.Domain.Entites.Stock.Authors;
+﻿using LMS.Domain.Entities.Stock.Authors;
 using LMS.Domain.Enums.Commons;
 
-namespace LMS.Domain.Entites.Stock.Categories
+namespace LMS.Domain.Entities.Stock.Categories
 {
     public class CategoryTranslation
     {

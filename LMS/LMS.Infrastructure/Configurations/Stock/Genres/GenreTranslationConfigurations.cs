@@ -1,4 +1,4 @@
-﻿using LMS.Domain.Entites.Stock.Genres;
+﻿using LMS.Domain.Entities.Stock.Genres;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
