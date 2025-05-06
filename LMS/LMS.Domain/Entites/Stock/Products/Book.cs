@@ -6,10 +6,6 @@ namespace LMS.Domain.Entites.Stock.Products
 {
     public class Book : Product
     {
-        //Foreign Key: CategoryId ==> one(Genre)-to-many(Book) relationship
-        public Guid GenreId { get; set; }
-
-
         //Foreign Key: AuthorId ==> one(Author)-to-many(Author) relationship
         public Guid AuthorId { get; set; }
 
@@ -22,14 +18,14 @@ namespace LMS.Domain.Entites.Stock.Products
 
         //Navigation Property:
         public ICollection<Publisher> Publishers { get; set; }
-        public ICollection<Genre> Genre { get; set; }
+        public ICollection<Genre> Genres { get; set; }
         public Author Author { get; set; }
 
 
         public Book()
         {
             Publishers = [];
-            Genre = [];
+            Genres = [];
             Author = null!;
         }
     }

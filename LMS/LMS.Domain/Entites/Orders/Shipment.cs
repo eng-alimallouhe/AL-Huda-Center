@@ -25,7 +25,7 @@ namespace LMS.Domain.Entites.Orders
         public Guid EmployeeId { get; set; }
 
 
-        public string TrackingNumber { get; set; } = string.Empty;
+        public string TrackingNumber { get; set; }
         public decimal Cost { get; set; }
         public ShipmentStatus Status { get; set; }
         public DateTime? EstimatedDeliveryDate { get; set; }
@@ -47,6 +47,7 @@ namespace LMS.Domain.Entites.Orders
         {
             ShipmentId = Guid.NewGuid();
             IsActive = true;
+            TrackingNumber = string.Empty;
             Order = null!;
             Address = null!;
             Customer = null!;

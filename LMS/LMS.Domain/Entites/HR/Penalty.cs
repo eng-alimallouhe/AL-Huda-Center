@@ -18,7 +18,7 @@ namespace LMS.Domain.Entites.HR
         public DateTime Date { get; set; }
 
 
-        //Soft delete
+        //Soft delete:
         public bool IsActive { get; set; }
 
         

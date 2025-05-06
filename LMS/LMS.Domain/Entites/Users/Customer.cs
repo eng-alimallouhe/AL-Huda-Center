@@ -14,10 +14,12 @@ namespace LMS.Domain.Entites.Users
 
 
         //Navigation Property:
+        public Cart Cart { get; set; }
         public LoyaltyLevel Level { get; set; }
         public ICollection<BaseOrder> Orders { get; set; }
         public ICollection<FinancialRevenue> Revenues { get; set; }
         public ICollection<Shipment> Shipments { get; set; }
+
 
         public Customer()
         {

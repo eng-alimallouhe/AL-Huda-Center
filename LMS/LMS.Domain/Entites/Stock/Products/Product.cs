@@ -1,4 +1,5 @@
-﻿using LMS.Domain.Entites.Stock.Categories;
+﻿using LMS.Domain.Entites.Orders;
+using LMS.Domain.Entites.Stock.Categories;
 
 namespace LMS.Domain.Entites.Stock.Products
 {
@@ -23,6 +24,7 @@ namespace LMS.Domain.Entites.Stock.Products
 
 
         // Navigation property:
+        public ICollection<CartItem> CartItems { get; set; }
         public ICollection<Category> Categories { get; set; }
         public ICollection<Discount> Discounts { get; set; }
         public ICollection<InventoryLog> Logs { get; set; }

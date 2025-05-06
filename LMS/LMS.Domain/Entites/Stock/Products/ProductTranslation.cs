@@ -11,8 +11,8 @@
 
 
         public required string Language { get; set; }
-        public required string Name { get; set; }
-        public required string Description { get; set; }
+        public required string ProductName { get; set; }
+        public required string ProductDescription { get; set; }
 
 
         //Navigation properties:

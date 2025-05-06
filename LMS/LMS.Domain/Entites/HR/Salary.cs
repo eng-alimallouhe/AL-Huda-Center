@@ -8,18 +8,23 @@ namespace LMS.Domain.Entites.HR
         //primary key
         public Guid SalaryId { get; set; }
 
+
         //Foreign Key: EmployeeId ==> one(employee)-to-many(salaries) relationship
         public Guid EmployeeId { get; set; }
+
 
         public Month Month { get; set; }
         public decimal Value { get; set; }
         public int Year { get; set; }
 
+
         //Soft Delete: 
         public bool IsActive { get; set; }
 
+
         //Navigation Property:
         public Employee Employee { get; set; }
+
 
         public Salary()
         {

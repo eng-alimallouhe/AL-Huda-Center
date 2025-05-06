@@ -12,7 +12,7 @@ namespace LMS.Domain.Entites.HR
         public Guid EmployeeId { get; set; }
 
 
-        public int RemainBalance { get; set; }
+        public int RemainBalance { get; set; } 
         public int BaseBalance { get; set; }
         public int TotalBalance { get; set; }
         public int RoundedBalance { get; set; }

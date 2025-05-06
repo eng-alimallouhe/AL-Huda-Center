@@ -1,5 +1,4 @@
-﻿using LMS.Domain.Entites.Users;
-using LMS.Domain.Enums.HR;
+﻿using LMS.Domain.Enums.HR;
 
 namespace LMS.Domain.Entites.HR
 {
