@@ -1,0 +1,84 @@
+# -------------------------------
+# Ignore Visual Studio files
+# -------------------------------
+.vs/
+.vscode/
+.idea/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# -------------------------------
+# Ignore .NET build results
+# -------------------------------
+bin/
+obj/
+
+# -------------------------------
+# Ignore ASP.NET Core specific files
+# -------------------------------
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# -------------------------------
+# Ignore Node.js and Angular related files
+# -------------------------------
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# -------------------------------
+# Ignore Angular build output
+# -------------------------------
+dist/
+.tmp/
+
+# -------------------------------
+# Ignore compiled output of .NET (dlls, exes, etc.)
+# -------------------------------
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+
+# -------------------------------
+# Ignore configuration and secret files
+# -------------------------------
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+secrets.json
+*.env
+
+# -------------------------------
+# Ignore user-specific and IDE-specific files
+# -------------------------------
+*.swp
+*.swo
+.idea/
+
+# -------------------------------
+# Ignore npm lock files (if you don't want to version lock)
+# -------------------------------
+package-lock.json
+yarn.lock
+
+# -------------------------------
+# Ignore files for code coverage or test results
+# -------------------------------
+*.coverage
+TestResults/
+
+# -------------------------------
+# Ignore Firebase config files (if you're using Firebase for authentication)
+# -------------------------------
+firebase.json
+
+# -------------------------------
+# Ignore macOS and Windows system files
+# -------------------------------
+.DS_Store
+Thumbs.db
