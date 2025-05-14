@@ -4,7 +4,7 @@ namespace LMS.Domain.Interfaces
 {
     public interface ISoftDeletableRepository<TEntity> where TEntity : class
     {
-        Task<ICollection<TEntity>> GettAllAsync(ISpecification<TEntity> specification);
+        Task<ICollection<TEntity>> GetAllAsync(ISpecification<TEntity> specification);
         Task<TEntity?> GetBySpecificationAsync(ISpecification<TEntity> specification);
         Task<TEntity?> GetByExpressionAsync(Expression<Func<TEntity, bool>> expression);
         Task<TEntity?> GetByIdAsync(Guid id);

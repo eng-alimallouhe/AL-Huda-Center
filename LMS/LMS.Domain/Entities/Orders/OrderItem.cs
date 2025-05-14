@@ -38,7 +38,7 @@ namespace LMS.Domain.Entities.Orders
 
 
         // Navigation property:
-        public SellOrder SellOrder { get; set; }
+        public Order Order { get; set; }
         public Product Product { get; set; }
         public Discount? Discount { get; set; }
 
@@ -48,7 +48,7 @@ namespace LMS.Domain.Entities.Orders
             IsActive = true;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
-            SellOrder = null!;
+            Order = null!;
             Product = null!;
         }
     }

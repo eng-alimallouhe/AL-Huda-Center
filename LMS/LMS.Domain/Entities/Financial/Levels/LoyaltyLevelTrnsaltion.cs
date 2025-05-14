@@ -1,7 +1,6 @@
-﻿using LMS.Domain.Entities.Financial.Levels;
-using LMS.Domain.Enums.Commons;
+﻿using LMS.Domain.Enums.Commons;
 
-namespace LMS.Domain.Entities.Financial
+namespace LMS.Domain.Entities.Financial.Levels
 {
     public class LoyaltyLevelTransaltion
     {

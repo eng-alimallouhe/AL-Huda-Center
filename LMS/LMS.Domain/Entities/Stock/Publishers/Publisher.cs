@@ -29,6 +29,7 @@ namespace LMS.Domain.Entities.Stock.Publishers
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
             Books = new List<Book>();
+            Translations = [];
         }
     }
 

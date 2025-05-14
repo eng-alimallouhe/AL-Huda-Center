@@ -22,7 +22,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LMS.Infrastructure.DbContexts
 {
-    public class AppDbContext : DbContext
+    public class LMSDbContext : DbContext
     {
         // Users Namespace
         public DbSet<Role> Roles { get; set; }
@@ -76,7 +76,7 @@ namespace LMS.Infrastructure.DbContexts
         public DbSet<FinancialRevenue> FinancialRevenues { get; set; }
 
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        public LMSDbContext(DbContextOptions<LMSDbContext> options) : base(options)
         { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
