@@ -18,7 +18,7 @@ namespace LMS.Domain.Entities.Users
         public ICollection<Leave> Leaves { get; set; }  
         public ICollection<Salary> Salaries { get; set; }  
         public LeaveBalance LeaveBalance { get; set; }
-        public ICollection<Order> Orders { get; set; }  
+        public ICollection<BaseOrder> Orders { get; set; }  
         public ICollection<FinancialRevenue> FinancialRevenues { get; set; }
 
 

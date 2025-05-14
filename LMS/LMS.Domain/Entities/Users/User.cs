@@ -24,7 +24,7 @@
         //locke user account:
         public bool IsLocked { get; set; } = false;
 
-        public bool IsVerified { get; set; } = false;
+        public bool IsEmailConfirmed { get; set; } = false;
 
         //soft delete:
         public bool IsDeleted { get; set; } = false;
@@ -37,7 +37,9 @@
         
         //Navigation Property:
         public Role Role { get; set; }
-
+        public OtpCode OtpCode { get; set; }
+        public RefreshToken RefreshToken { get; set; }
+        public ICollection<Notification> Notifications { get; set; }
 
         public User()
         {
@@ -49,6 +51,9 @@
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
             Role = null!;
+            OtpCode = null!;
+            RefreshToken = null!;
+            Notifications = [];
         }
     }
 }

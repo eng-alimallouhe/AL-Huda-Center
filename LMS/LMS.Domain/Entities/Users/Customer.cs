@@ -10,14 +10,14 @@ namespace LMS.Domain.Entities.Users
         public Guid LevelId { get; set; }
 
 
-        public decimal points { get; set; }
+        public decimal Points { get; set; }
 
 
         //navigation property:
         public LoyaltyLevel Level { get; set; }
         public ICollection<Address> Addresses { get; set; } 
         public Cart Cart { get; set; } 
-        public ICollection<Order> Orders { get; set; } 
+        public ICollection<BaseOrder> Orders { get; set; } 
         public ICollection<FinancialRevenue> FinancialRevenues { get; set; }
 
 

@@ -27,6 +27,7 @@ namespace LMS.Domain.Entities.Stock.Products
         public ICollection<Discount> Discounts { get; set; }
         public ICollection<InventoryLog> Logs { get; set; }
         public ICollection<CartItem> CartItems { get; set; }
+        public ICollection<ProductTranslation> Translations { get; set; }
 
         
         public Product()
@@ -35,10 +36,11 @@ namespace LMS.Domain.Entities.Stock.Products
             IsActive = true;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
-            Categories = new List<Category>();
-            Discounts = new List<Discount>();
-            Logs = new List<InventoryLog>();
-            CartItems = new List<CartItem>();
+            Categories = [];
+            Discounts = [];
+            Logs = [];
+            CartItems = [];
+            Translations = [];
         }
     }
 }

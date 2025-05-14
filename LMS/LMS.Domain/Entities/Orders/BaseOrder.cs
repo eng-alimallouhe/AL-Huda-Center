@@ -45,6 +45,7 @@ namespace LMS.Domain.Entities.Orders
         {
             OrderId = Guid.NewGuid();
             IsActive = true;
+            Status = OrderStatus.Pending;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
             Customer = null!;

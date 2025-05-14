@@ -8,10 +8,6 @@ namespace LMS.Domain.Entities.Stock.Publishers
         public Guid PublisherId { get; set; }
 
 
-        public required string PublisherName { get; set; }
-        public required string PublisherDescription { get; set; }
-
-
         //soft delete
         public bool IsActive { get; set; }
 
@@ -23,6 +19,7 @@ namespace LMS.Domain.Entities.Stock.Publishers
 
         // Navigation property:
         public ICollection<Book> Books { get; set; }
+        public ICollection<PublisherTranslation> Translations { get; set; }
 
 
         public Publisher()

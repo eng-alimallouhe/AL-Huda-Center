@@ -1,10 +1,9 @@
 ﻿using LMS.Domain.Entities.Financial.Levels;
-using LMS.Domain.Entities.Users;
 using LMS.Domain.Enums.Commons;
 
 namespace LMS.Domain.Entities.Financial
 {
-    public class LoyaltyLevelTrnsaltion
+    public class LoyaltyLevelTransaltion
     {
         //Primary Key:
         public Guid TranslationId { get; set; }
@@ -19,7 +18,7 @@ namespace LMS.Domain.Entities.Financial
 
         public LoyaltyLevel LoyaltyLevel { get; set; }
 
-        public LoyaltyLevelTrnsaltion()
+        public LoyaltyLevelTransaltion()
         {
             TranslationId = Guid.NewGuid();
             LoyaltyLevel = null!;

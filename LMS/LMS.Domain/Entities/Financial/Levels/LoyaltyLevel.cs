@@ -21,6 +21,7 @@ namespace LMS.Domain.Entities.Financial.Levels
 
         //navigation property:
         public ICollection<Customer> Customers { get; set; }
+        public ICollection<LoyaltyLevelTransaltion> Translations { get; set; }
 
         public LoyaltyLevel()
         {
@@ -28,7 +29,8 @@ namespace LMS.Domain.Entities.Financial.Levels
             IsActive = true;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
-            Customers =  new List<Customer>();
+            Customers =  [];
+            Translations = [];
         }
     }
 }

@@ -18,11 +18,12 @@ namespace LMS.Domain.Entities.Orders
         
         
         //Foreign Key: DiscountId ==> one(discount)-to-one(CartItem) relationship
-        public Guid DiscounttId { get; set; }
+        public Guid? DiscounttId { get; set; }
 
 
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
+
         public decimal DiscountAmount  => Discount != null 
             ? Quantity * UnitPrice * (Discount.DiscountPercentage/100)
             : 0;
