@@ -21,10 +21,14 @@ namespace LMS.Infrastructure.Configurations.Users
                     .IsRequired()
                     .HasMaxLength(60);
             
-            builder.Property(a => a.GZipCode)
+            builder.Property(a => a.Governorate)
                     .IsRequired()
-                    .HasMaxLength(60);
-            
+                    .HasMaxLength(100);
+
+            builder.Property(a => a.City)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
             builder.Property(a => a.PhoneNumber)
                     .IsRequired()
                     .HasMaxLength(60);

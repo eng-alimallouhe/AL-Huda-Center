@@ -23,6 +23,9 @@ namespace LMS.Infrastructure.Services
             var password = _emailSettings.Password;
             var host = _emailSettings.Host;
             var port = _emailSettings.Port;
+            var logoUrl = _emailSettings.LogoUrl;
+
+            message = message.Replace("{{logoUrl}}", logoUrl);
 
             var mail = new MimeMessage();
             mail.From.Add(MailboxAddress.Parse(fromEmail));

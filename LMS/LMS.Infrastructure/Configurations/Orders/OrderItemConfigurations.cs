@@ -38,7 +38,7 @@ namespace LMS.Infrastructure.Configurations.Orders
             builder.Property(oi => oi.UpdatedAt)
                     .IsRequired();
             
-            builder.HasOne(oi => oi.SellOrder)
+            builder.HasOne(oi => oi.Order)
                 .WithMany(so => so.OrderItems)
                 .HasForeignKey(oi => oi.SellOrderId);
             

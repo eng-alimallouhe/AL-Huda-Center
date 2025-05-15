@@ -1,4 +1,4 @@
-﻿using LMS.Domain.Entities.Stock;
+﻿using LMS.Domain.Entities.Stock.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -25,10 +25,12 @@ namespace LMS.Infrastructure.Configurations.Stock.Products
             builder.Property(b => b.PublishedYear)
                     .IsRequired();
 
-            builder.HasOne(b => b.Genre)
+            builder.HasMany(b => b.Genres)
                     .WithMany(g => g.Books)
-                    .HasForeignKey(b => b.GenreId)
-                    .IsRequired();
+                    .UsingEntity(j =>
+                    {
+                        j.ToTable("BooksGenres");
+                    });
 
             builder.HasOne(b => b.Author)
                     .WithMany(a => a.Books)

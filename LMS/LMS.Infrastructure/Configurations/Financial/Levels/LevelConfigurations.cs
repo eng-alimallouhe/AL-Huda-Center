@@ -13,11 +13,6 @@ namespace LMS.Infrastructure.Configurations.Financial.Levels
 
             builder.HasKey(l => l.LevelId);
 
-
-            builder.Property(l => l.LevelName)
-                    .IsRequired()
-                    .HasMaxLength(60);
-            
             builder.Property(l => l.RequiredPoints)
                     .IsRequired();
             
@@ -32,10 +27,6 @@ namespace LMS.Infrastructure.Configurations.Financial.Levels
             builder.Property(l => l.IsActive)
                     .IsRequired();
 
-            builder.Property(l => l.LevelDescription)
-                    .IsRequired()
-                    .HasMaxLength(255);
-            
             builder.Property(l => l.CreatedAt)
                     .IsRequired();
             

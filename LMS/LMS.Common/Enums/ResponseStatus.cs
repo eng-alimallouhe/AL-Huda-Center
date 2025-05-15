@@ -27,6 +27,7 @@
         CODE_ERROR,
         SUCCESSS_CODE_SEND,
         VERIFY_SUCCESS,
+        INDEFINITE_TIME_PERIOD,
 
 
         // Common ResponseStatus for errors:

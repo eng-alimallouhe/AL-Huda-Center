@@ -2,8 +2,8 @@
 {
     public enum CodeType
     {
-        LogIn, 
-        SignUp, 
-        ResetPassword
+        LogIn = 0, 
+        SignUp = 1, 
+        ResetPassword = 2
     }
 }

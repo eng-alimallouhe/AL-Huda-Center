@@ -75,8 +75,15 @@ namespace LMS.Infrastructure.Repositories
 
             if (entity != null)
             {
-                _dbSet.Remove(entity);
-                await _context.SaveChangesAsync();
+                try
+                {
+                    _dbSet.Remove(entity);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateException ex) when (ex.InnerException is SqlException sqlEX)
+                {
+                    throw new DatabaseException(sqlEX.Message, sqlEX.Number);
+                }
             }
 
             else

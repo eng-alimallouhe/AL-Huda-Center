@@ -10,7 +10,7 @@ namespace LMS.Infrastructure.Services
             string templateString = string.Empty;
 
 
-            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, language.ToString().ToUpper(), $"{purpose.ToString()}.html");
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EmailTemplates", language.ToString().ToUpper(), $"{purpose.ToString()}.html");
 
             if (!File.Exists(path))
             {

@@ -17,13 +17,17 @@ namespace LMS.Domain.Entities.Users
 
 
         //Timestamp:
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public DateTime ExpiredAt { get; set; } = DateTime.Now.AddMinutes(10);
+        public DateTime CreatedAt { get; set; } 
+        public DateTime ExpiredAt { get; set; } 
         
 
         public OtpCode()
         {
             OtpCodeId = Guid.NewGuid();
+            CreatedAt = DateTime.UtcNow;
+            ExpiredAt = DateTime.UtcNow.AddMinutes(10);
+            IsUsed = false;
+            FailedAttempts = 0;
         }
     }
 }
