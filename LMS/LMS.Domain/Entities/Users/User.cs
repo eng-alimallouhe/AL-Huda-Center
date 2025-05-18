@@ -1,4 +1,6 @@
-﻿namespace LMS.Domain.Entities.Users
+﻿using LMS.Domain.Enums.Commons;
+
+namespace LMS.Domain.Entities.Users
 {
     public class User
     {
@@ -19,7 +21,7 @@
         public string ProfilePictureUrl { get; set; }
         public DateTime LastPasswordChange { get; set; }
         public bool IsTwoFactorEnabled { get; set; }
-
+        public Language Language { get; set; } 
 
         //locke user account:
         public bool IsLocked { get; set; } = false;

@@ -7,15 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="MediatR" Version="12.5.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.5" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.35.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.35.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\LMS.Common\LMS.Common.csproj" />
     <ProjectReference Include="..\LMS.Domain\LMS.Domain.csproj" />
-    <ProjectReference Include="..\LMS.Infrastructure\LMS.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

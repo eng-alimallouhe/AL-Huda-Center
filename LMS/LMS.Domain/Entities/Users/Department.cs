@@ -23,7 +23,7 @@ namespace LMS.Domain.Entities.Users
 
         //navigation property:
         public ICollection<EmployeeDepartment> EmployeeDepartments { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<BaseOrder> Orders { get; set; }
 
 
         public Department()

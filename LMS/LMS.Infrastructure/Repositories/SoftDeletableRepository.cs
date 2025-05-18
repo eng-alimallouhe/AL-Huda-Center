@@ -1,7 +1,8 @@
 ﻿using System.Data;
 using System.Linq.Expressions;
 using LMS.Common.Exceptions;
-using LMS.Domain.Interfaces;
+using LMS.Domain.Abstractions.Repositories;
+using LMS.Domain.Abstractions.Specifications;
 using LMS.Infrastructure.DbContexts;
 using LMS.Infrastructure.Specifications;
 using Microsoft.Data.SqlClient;

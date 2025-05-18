@@ -22,12 +22,9 @@ namespace LMS.Infrastructure.Configurations.Orders
             builder.Property(oi => oi.UnitPrice)
                     .HasColumnType("decimal(7, 2)");
             
-            builder.Property(oi => oi.Discount)
-                    .HasColumnType("decimal(7, 2)")
-                    .IsRequired();
+            builder.Property(oi => oi.DiscountId)
+                    .IsRequired(false);
             
-            builder.Property(oi => oi.TotalPrice)
-                    .HasColumnType("decimal(7, 2)");
             
             builder.Property(oi => oi.IsActive)
                     .IsRequired();

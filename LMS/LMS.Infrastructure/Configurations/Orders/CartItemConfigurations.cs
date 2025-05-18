@@ -43,7 +43,7 @@ namespace LMS.Infrastructure.Configurations.Orders
             builder.HasOne(ci => ci.Product)
                 .WithMany(p => p.CartItems)
                 .HasForeignKey(ci => ci.ProductId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(ci => ci.Discount)
                     .WithOne()

@@ -1,5 +1,4 @@
 ﻿using LMS.Domain.Entities.Users;
-using LMS.Domain.Interfaces;
 using LMS.Infrastructure.DbContexts;
 
 namespace LMS.Infrastructure.Repositories.Users

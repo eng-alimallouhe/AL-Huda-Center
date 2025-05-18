@@ -10,7 +10,7 @@ namespace LMS.Infrastructure.Configurations.Orders
     {
         public void Configure(EntityTypeBuilder<BaseOrder> builder)
         {
-            builder.ToTable("Orders");
+            builder.ToTable("BaseOrders");
 
             builder.HasKey(bo => bo.OrderId);
 

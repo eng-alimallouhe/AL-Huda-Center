@@ -1,4 +1,4 @@
-﻿using LMS.Domain.Interfaces;
+﻿using LMS.Domain.Abstractions.Specifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace LMS.Infrastructure.Specifications

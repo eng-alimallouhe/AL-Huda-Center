@@ -1,11 +1,15 @@
-﻿using LMS.Common.Enums;
+﻿using System.Text.Json.Serialization;
+using LMS.Common.Enums;
 
 namespace LMS.Common.Results
 {
     public class Result
     {
         public bool IsSuccess { get; }
+
+        [JsonIgnore]
         public bool IsFailed { get; }
+        
         public ResponseStatus Status { get; }
 
         public static Result Success(ResponseStatus message) => new Result(true, message);
@@ -21,6 +25,7 @@ namespace LMS.Common.Results
 
     public class Result<TEntity> : Result
     {
+        [JsonIgnore]
         public TEntity? Value { get; }
 
         public static Result<TEntity> Success(TEntity value, ResponseStatus message) => new Result<TEntity>(true, value, message);

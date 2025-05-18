@@ -12,6 +12,7 @@ namespace LMS.Domain.Entities.Users
         
         public required string HashedValue { get; set; }
         public bool IsUsed { get; set; }
+        public bool IsVerified { get; set; }
         public int FailedAttempts { get; set; }
         public CodeType CodeType { get; set; }
 
@@ -27,6 +28,7 @@ namespace LMS.Domain.Entities.Users
             CreatedAt = DateTime.UtcNow;
             ExpiredAt = DateTime.UtcNow.AddMinutes(10);
             IsUsed = false;
+            IsVerified = false;
             FailedAttempts = 0;
         }
     }

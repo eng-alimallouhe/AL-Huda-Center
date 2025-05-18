@@ -1,4 +1,5 @@
-﻿using LMS.Domain.Entities.Stock;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using LMS.Domain.Entities.Stock;
 using LMS.Domain.Entities.Stock.Products;
 
 namespace LMS.Domain.Entities.Orders
@@ -21,10 +22,13 @@ namespace LMS.Domain.Entities.Orders
 
         public int Quantity { get; set; } = 1;
         public decimal UnitPrice { get; set; }
+
+        [NotMapped]
         public decimal DiscountAmount => Discount != null
             ? Quantity * UnitPrice * (Discount.DiscountPercentage / 100)
             : 0;
 
+        [NotMapped]
         public decimal TotalPrice => (Quantity * UnitPrice) - DiscountAmount;
 
         

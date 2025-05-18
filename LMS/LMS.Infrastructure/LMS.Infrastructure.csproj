@@ -17,21 +17,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LMS.Application\LMS.Application.csproj" />
     <ProjectReference Include="..\LMS.Common\LMS.Common.csproj" />
     <ProjectReference Include="..\LMS.Domain\LMS.Domain.csproj" />
   </ItemGroup>
 
 	<ItemGroup>
-		<Content Include="EmailTemplates\**\*.html">
+		<Content Include="Resources\EmailTemplates\**\*.html">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Remove="EmailTemplates\AR\PasswordResetTemplate.html" />
-	  <Content Remove="EmailTemplates\AR\RegistrationVerificationTemplate.html" />
-	  <Content Remove="EmailTemplates\EN\PasswordResetTemplate.html" />
-	  <Content Remove="EmailTemplates\EN\RegistrationVerificationTemplate.html" />
+	  <Content Remove="Resources\EmailTemplates\AR\PasswordResetTemplate.html" />
+	  <Content Remove="Resources\EmailTemplates\AR\RegistrationVerificationTemplate.html" />
+	  <Content Remove="Resources\EmailTemplates\EN\PasswordResetTemplate.html" />
+	  <Content Remove="Resources\EmailTemplates\EN\RegistrationVerificationTemplate.html" />
 	</ItemGroup>
 	
 </Project>

@@ -13,6 +13,9 @@
         WEAK_PASSWORD,
         AUTHENTICATION_FAILED,
         SAME_PASSWORD,
+        ACTIVATION_SUCCESS,
+        ACTIVATION_FAILED,
+        MORE_STEP_REQUERD,
 
 
         // User ResponseStatus for success: 
@@ -28,6 +31,7 @@
         SUCCESSS_CODE_SEND,
         VERIFY_SUCCESS,
         INDEFINITE_TIME_PERIOD,
+        WRONGE_CODE_TYPE,
 
 
         // Common ResponseStatus for errors:

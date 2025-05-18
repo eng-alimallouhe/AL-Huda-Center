@@ -19,6 +19,7 @@ using LMS.Infrastructure.Configurations.Orders;
 using LMS.Infrastructure.Configurations.Financial;
 using LMS.Infrastructure.Configurations.Financial.Levels;
 using Microsoft.EntityFrameworkCore;
+using LMS.Infrastructure.Configurations.Stock.Categories;
 
 namespace LMS.Infrastructure.DbContexts
 {
@@ -100,11 +101,17 @@ namespace LMS.Infrastructure.DbContexts
             modelBuilder.ApplyConfiguration(new DiscountConfigurations());
             modelBuilder.ApplyConfiguration(new InventoryLogConfigurations());
             modelBuilder.ApplyConfiguration(new GenreConfigurations());
+            modelBuilder.ApplyConfiguration(new GenreTranslationConfigurations());
             modelBuilder.ApplyConfiguration(new PublisherConfigurations());
+            modelBuilder.ApplyConfiguration(new PublisherTranslationConfigurations());
             modelBuilder.ApplyConfiguration(new ProductConfigurations());
+            modelBuilder.ApplyConfiguration(new ProductTranslationConfigurations());
             modelBuilder.ApplyConfiguration(new BookConfigurations());
             modelBuilder.ApplyConfiguration(new AuthorConfigurations());
-
+            modelBuilder.ApplyConfiguration(new AuthorTranslationConfigurations());
+            modelBuilder.ApplyConfiguration(new CategoryConfigurations());
+            modelBuilder.ApplyConfiguration(new CategoryTranslationConfigurations());
+            
             //Orders Namespace: 
             modelBuilder.ApplyConfiguration(new OrderConfigurations());
             modelBuilder.ApplyConfiguration(new PrintOrderConfigurations());
@@ -125,6 +132,7 @@ namespace LMS.Infrastructure.DbContexts
             //Financial Namespace: 
             modelBuilder.ApplyConfiguration(new PaymentConfigurations());
             modelBuilder.ApplyConfiguration(new LevelConfigurations());
+            modelBuilder.ApplyConfiguration(new LevelTranslationConfigurations());
             modelBuilder.ApplyConfiguration(new FinancialRevenueConfigurations());
         }
     }
