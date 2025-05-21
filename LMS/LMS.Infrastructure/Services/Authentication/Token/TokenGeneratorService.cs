@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using LMS.Application.Abstractions.Services.Authentication;
+using LMS.Application.DTOs.AuthenticationDTOs;
 using LMS.Common.Enums;
 using LMS.Common.Exceptions;
 using LMS.Common.Results;
@@ -20,6 +21,7 @@ namespace LMS.Infrastructure.Services.Authentication.Token
     public class TokenGeneratorService : ITokenGeneratorService
     {
         private readonly TokenSettings _tokenSettings;
+        private readonly ITokenReaderService _tokenReader;
         private readonly ISoftDeletableRepository<User> _userRepo;
         private readonly ILogger<TokenGeneratorService> _logger;
         private readonly IBaseRepository<RefreshToken> _refreshRepo;
@@ -27,17 +29,20 @@ namespace LMS.Infrastructure.Services.Authentication.Token
 
         public TokenGeneratorService(
             IOptions<TokenSettings> options,
+            ITokenReaderService tokenReader,
             ISoftDeletableRepository<User> userRepo,
             ILogger<TokenGeneratorService> logger,
             IBaseRepository<RefreshToken> refreshRepo,
             IUnitOfWork unitOfWork)
         {
             _tokenSettings = options.Value;
+            _tokenReader = tokenReader;
             _userRepo = userRepo;
             _logger = logger;
             _refreshRepo = refreshRepo;
             _unitOfWork = unitOfWork;
         }
+
 
         public async Task<Result<string>> GenerateAccessTokenAsync(Guid userId)
         {
@@ -84,12 +89,13 @@ namespace LMS.Infrastructure.Services.Authentication.Token
                 ResponseStatus.TASK_COMPLETED);
         }
 
+
         public async Task<Result<string>> GenerateRefreshTokenAsync(Guid userId)
         {
             await _unitOfWork.BeginTransactionAsync();
             var user = await _userRepo.GetBySpecificationAsync(new Specification<User>(
                 criteria: user => user.UserId == userId,
-                includes: [user => user.Role, user => user.RefreshToken]
+                includes: [user => user.RefreshToken]
                 ));
 
             // Ensure the user exists before generating a token
@@ -157,6 +163,53 @@ namespace LMS.Infrastructure.Services.Authentication.Token
             }
             await _unitOfWork.CommitTransactionAsync();
             return Result<string>.Success(token.Token, ResponseStatus.AUTHENTICATION_SUCCESS);
+        }
+    
+
+        public async Task<Result<AuthorizationDTO>> ValidateTokenAsync(string accessToken, string refreshToken)
+        {
+            var userIdResult = _tokenReader.GetUserId(accessToken);
+
+
+            if (userIdResult == null || userIdResult == Guid.Empty)
+            {
+                return Result<AuthorizationDTO>.Failure(ResponseStatus.UNVALIDE_TOKEN); 
+            }
+
+            Guid userId = userIdResult.Value;
+
+            var refreshTokenObj = await _refreshRepo.GetByExpressionAsync(token => 
+                    token.UserId == userId);
+
+            if (refreshTokenObj is null || !refreshTokenObj.Token.Equals(refreshToken))
+            {
+                return Result<AuthorizationDTO>.Failure(ResponseStatus.UNVALIDE_TOKEN);
+            }
+
+            if (refreshTokenObj.ExpiredAt < DateTime.UtcNow)
+            {
+                return Result<AuthorizationDTO>.Failure(ResponseStatus.EXPIRED_SESSION);
+            }
+
+            var refreshResult = await GenerateRefreshTokenAsync(userId);
+
+            if (refreshResult.IsFailed || refreshResult.Value is null)
+            {
+                return Result<AuthorizationDTO>.Failure(ResponseStatus.AUTHENTICATION_FAILED);
+            }
+
+            var accessResult = await GenerateAccessTokenAsync(userId);
+
+            if (accessResult.IsFailed || accessResult.Value is null)
+            {
+                return Result<AuthorizationDTO>.Failure(ResponseStatus.AUTHENTICATION_FAILED);
+            }
+
+            return Result<AuthorizationDTO>.Success(new AuthorizationDTO
+            {
+                RefreshToken = refreshResult.Value,
+                AccessToken = accessResult.Value,
+            }, ResponseStatus.ACTIVATION_SUCCESS);
         }
     }
 }

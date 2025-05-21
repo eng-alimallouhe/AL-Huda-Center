@@ -4,6 +4,7 @@ using LMS.Application.Features.Authentication.Accounts.Commands.LogIn;
 using LMS.Application.Features.Authentication.OtpCodes.Commands.SendOtpCode;
 using LMS.Application.Features.Authentication.OtpCodes.Commands.VerifyOtpCode;
 using LMS.Application.Features.Authentication.Register.Commands.CreateTempAccount;
+using LMS.Application.Features.Authentication.Tokens.Command.AuthenticationRefresh;
 using LMS.Domain.Enums.Users;
 
 namespace LMS.API.MappingProfiles
@@ -13,10 +14,15 @@ namespace LMS.API.MappingProfiles
         public UserProfile()
         {
             CreateMap<RegisterRequestDTO, CreateTempAccountCommand>();
+            
             CreateMap<OtpCodeSendRequstDTO, SendOtpCodeCommand>()
                 .ForMember(dest => dest.CodeType, opt => opt.MapFrom(src => (CodeType) src.CodeType));
+            
             CreateMap<OtpVerifyRequest, VerifyOtpCodeCommand>();
+            
             CreateMap<LoginRequestDTO, LogInCommand>();
+
+            CreateMap<AuthorizationRequestDTO, AuthenticationRefreshCommand>();
         }
     }
 }

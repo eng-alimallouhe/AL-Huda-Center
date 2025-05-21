@@ -2,6 +2,7 @@
 using LMS.API.DTOs.Authentication;
 using LMS.Application.DTOs.AuthenticationDTOs;
 using LMS.Application.Features.Authentication.Accounts.Commands.LogIn;
+using LMS.Application.Features.Authentication.Accounts.Commands.ResetPassword;
 using LMS.Application.Features.Authentication.Accounts.Commands.TowFactorAuthentication;
 using LMS.Common.Results;
 using MediatR;
@@ -44,6 +45,20 @@ namespace LMS.API.Controllers.Authintication
         public async Task<ActionResult<Result<AuthorizationDTO>>> CheckTowFactor(string email)
         {
             var response = await _mediator.Send(new TowFactorAuthenticationCommand(email));
+
+            if (response.IsFailed)
+            {
+                return Unauthorized(response);
+            }
+
+            return Ok(response);
+        }
+
+
+        [HttpPost("reset-password/{email}")]
+        public async Task<ActionResult<Result<AuthorizationDTO>>> ResetPassword(string email)
+        {
+            var response = await _mediator.Send(new ResetPasswordCommand(email));
 
             if (response.IsFailed)
             {

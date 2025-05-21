@@ -206,11 +206,12 @@ namespace LMS.Infrastructure.Services.Authentication
             if (otp.CodeType == CodeType.SignUp)
             {
                 user.IsEmailConfirmed = true;
-                await _userRepo.UpdateAsync(user);
             }
 
             otp.IsUsed = true;
+            user.LastLogIn = DateTime.UtcNow;
 
+            await _userRepo.UpdateAsync(user);
             await _codeRepo.UpdateAsync(otp);
 
             return Result<Guid>.Success(user.UserId, ResponseStatus.ACTIVATION_SUCCESS);
@@ -265,7 +266,6 @@ namespace LMS.Infrastructure.Services.Authentication
 
             return Result.Success(ResponseStatus.VERIFY_SUCCESS);
         }
-
 
 
         //this function check if the provided password is contain atleast 1 lower-case and 1 upper-case and 1 number

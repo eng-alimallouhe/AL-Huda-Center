@@ -16,7 +16,7 @@
         ACTIVATION_SUCCESS,
         ACTIVATION_FAILED,
         MORE_STEP_REQUERD,
-
+        UNVALIDE_TOKEN,
 
         // User ResponseStatus for success: 
         AUTHENTICATION_SUCCESS,
