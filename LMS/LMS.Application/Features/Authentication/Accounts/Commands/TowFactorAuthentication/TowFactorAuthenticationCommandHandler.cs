@@ -1,42 +1,28 @@
 ﻿using LMS.Application.Abstractions.Services.Authentication;
 using LMS.Application.DTOs.AuthenticationDTOs;
 using LMS.Common.Enums;
-using LMS.Common.Exceptions;
-using LMS.Common.Extensions;
 using LMS.Common.Results;
-using LMS.Domain.Abstractions.Repositories;
-using LMS.Domain.Abstractions.Specifications;
-using LMS.Domain.Entities.Users;
+using LMS.Domain.Enums.Users;
 using MediatR;
-using Microsoft.Extensions.Logging;
 
-namespace LMS.Application.Features.Authentication.Register.Commands.ActivateAccount
+namespace LMS.Application.Features.Authentication.Accounts.Commands.TowFactorAuthentication
 {
-    public class ActivateAccountCommandHandler : IRequestHandler<ActivateAccountCommand, Result<AuthorizationDTO>>
+    public class TowFactorAuthenticationCommandHandler : IRequestHandler<TowFactorAuthenticationCommand, Result<AuthorizationDTO>>
     {
         private readonly IAuthenticationHelper _authenticationHelper;
-        private readonly ISoftDeletableRepository<User> _userRepo;
-        private readonly IBaseRepository<OtpCode> _codeRepo;
-        private readonly ILogger<ActivateAccountCommandHandler> _logger;
         private readonly ITokenGeneratorService _tokenGeneratorService;
 
-        public ActivateAccountCommandHandler(
+        public TowFactorAuthenticationCommandHandler(
             IAuthenticationHelper authenticationHelper,
-            ISoftDeletableRepository<User> userRepo,
-            IBaseRepository<OtpCode> codeRepo,
-            ILogger<ActivateAccountCommandHandler> logger,
             ITokenGeneratorService tokenGeneratorService)
         {
             _authenticationHelper = authenticationHelper;
-            _userRepo = userRepo;
-            _codeRepo = codeRepo;
-            _logger = logger;
             _tokenGeneratorService = tokenGeneratorService;
         }
 
-        public async Task<Result<AuthorizationDTO>> Handle(ActivateAccountCommand request, CancellationToken cancellationToken)
+        public async Task<Result<AuthorizationDTO>> Handle(TowFactorAuthenticationCommand request, CancellationToken cancellationToken)
         {
-            Result<Guid> authResult = await _authenticationHelper.CanActivateAuth(request.Email, Domain.Enums.Users.CodeType.SignUp);
+            var authResult = await _authenticationHelper.CanActivateAuth(request.Email, CodeType.LogIn);
 
             if (authResult.IsFailed)
             {
@@ -53,17 +39,17 @@ namespace LMS.Application.Features.Authentication.Register.Commands.ActivateAcco
             }
 
             var accessResult = await _tokenGeneratorService.GenerateAccessTokenAsync(userId);
-                
+
             if (accessResult.IsFailed || accessResult.Value is null)
             {
-                return Result<AuthorizationDTO>.Failure(accessResult.Status);
+                return Result<AuthorizationDTO>.Failure(refreshResult.Status);
             }
 
             return Result<AuthorizationDTO>.Success(new AuthorizationDTO
             {
                 RefreshToken = refreshResult.Value,
-                AccessToken = accessResult.Value,
-            }, ResponseStatus.ACTIVATION_SUCCESS);
+                AccessToken = accessResult.Value
+            }, ResponseStatus.AUTHENTICATION_SUCCESS);
         }
     }
 }

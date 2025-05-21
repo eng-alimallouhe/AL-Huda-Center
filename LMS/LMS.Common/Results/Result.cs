@@ -25,7 +25,6 @@ namespace LMS.Common.Results
 
     public class Result<TEntity> : Result
     {
-        [JsonIgnore]
         public TEntity? Value { get; }
 
         public static Result<TEntity> Success(TEntity value, ResponseStatus message) => new Result<TEntity>(true, value, message);

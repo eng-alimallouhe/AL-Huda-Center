@@ -7,6 +7,7 @@ namespace LMS.Application.Features.Authentication.Register.Commands.CreateTempAc
     public record CreateTempAccountCommand(
         string FullName, 
         string UserName, 
+        string PhoneNumber,
         string Email, 
         string Password, 
         int Language) : IRequest<Result>;

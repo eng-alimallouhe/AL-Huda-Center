@@ -1,9 +1,10 @@
 ﻿using LMS.Common.Enums;
+using LMS.Domain.Enums.Commons;
 
 namespace LMS.Application.Abstractions.Services.EmailServices
 {
     public interface IEmailTemplateReaderService
     {
-        public string? ReadTemplate(SupportedLanguages language, EmailPurpose purpose);
+        public string? ReadTemplate(Language language, EmailPurpose purpose);
     }
 }

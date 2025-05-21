@@ -3,7 +3,6 @@ using LMS.Application.Abstractions.Services.EmailSender;
 using LMS.Application.Abstractions.Services.EmailServices;
 using LMS.Common.Enums;
 using LMS.Common.Exceptions;
-using LMS.Common.Extensions;
 using LMS.Common.Results;
 using LMS.Domain.Abstractions;
 using LMS.Domain.Abstractions.Repositories;
@@ -15,7 +14,7 @@ namespace LMS.Application.Features.Authentication.OtpCodes.Commands.SendOtpCode
 {
     public class SendOtpCodeCommandHandler : IRequestHandler<SendOtpCodeCommand, Result>
     {
-        private readonly IOtpService _otpService;
+        private readonly IAuthenticationHelper _authenticationHelper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IEmailSenderService _emailSenderService;
         private readonly ISoftDeletableRepository<User> _userRepo;
@@ -24,7 +23,7 @@ namespace LMS.Application.Features.Authentication.OtpCodes.Commands.SendOtpCode
 
 
         public SendOtpCodeCommandHandler(
-            IOtpService otpService,
+            IAuthenticationHelper authenticationHelper,
             IUnitOfWork unitOfWork,
             IEmailSenderService emailSenderService,
             ISoftDeletableRepository<User> userRepo,
@@ -32,7 +31,7 @@ namespace LMS.Application.Features.Authentication.OtpCodes.Commands.SendOtpCode
             IEmailTemplateReaderService emailTemplateReaderService,
             ILogger<SendOtpCodeCommandHandler> logger)
         {
-            _otpService = otpService;
+            _authenticationHelper = authenticationHelper;
             _unitOfWork = unitOfWork;
             _emailSenderService = emailSenderService;
             _userRepo = userRepo;
@@ -42,30 +41,32 @@ namespace LMS.Application.Features.Authentication.OtpCodes.Commands.SendOtpCode
 
         public async Task<Result> Handle(SendOtpCodeCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.BeginTransactionAsync();
 
             var purpose = (EmailPurpose)(int) request.CodeType;
 
-            var template = _emailTemplateReaderService.ReadTemplate(request.Language, purpose);
-
-            if (template is null)
-            {
-                return Result.Failure(ResponseStatus.FILE_NOT_FOUND);
-            }
-
-            var user = await _userRepo.GetByExpressionAsync(user => user.Email.ToNormalize() == request.Email.ToNormalize());
+            var user = await _userRepo.GetByExpressionAsync(user => user.Email.ToLower().Trim() == request.Email.ToLower().Trim());
 
             if (user is null)
             {
                 return Result.Failure(ResponseStatus.ACCOUNT_NOT_FOUND);
             }
 
+            var template = _emailTemplateReaderService.ReadTemplate(user.Language, purpose);
+
+            if (template is null)
+            {
+                return Result.Failure(ResponseStatus.FILE_NOT_FOUND);
+            }
+
+            await _unitOfWork.BeginTransactionAsync();
+
             Result<string> codeResult; 
 
             try
             {
-                codeResult = await _otpService.GenerateAndSaveCodeAsync(user.UserId, request.CodeType);
+                codeResult = await _authenticationHelper.GenerateAndSaveCodeAsync(user.UserId, request.CodeType);
             }
+
             catch(DatabaseException ex)
             {
                 _logger.LogError($"Error while deleting the code for user : {user.UserName}, \n" +
@@ -116,6 +117,7 @@ namespace LMS.Application.Features.Authentication.OtpCodes.Commands.SendOtpCode
                     await Task.Delay(1000).ConfigureAwait(false);
                 }
             }
+            
             await _unitOfWork.CommitTransactionAsync();
 
             return Result.Success(ResponseStatus.SUCCESSS_CODE_SEND);

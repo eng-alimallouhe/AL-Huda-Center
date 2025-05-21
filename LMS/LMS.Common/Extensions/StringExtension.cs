@@ -4,7 +4,7 @@
     {
         public static string ToNormalize(this string value)
         {
-            return value.ToUpperInvariant().Trim() ?? string.Empty;
+            return value.ToUpper().Trim() ?? string.Empty;
         }
     }
 }

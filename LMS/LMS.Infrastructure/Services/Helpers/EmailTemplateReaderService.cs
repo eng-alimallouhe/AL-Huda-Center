@@ -1,11 +1,12 @@
 ﻿using LMS.Application.Abstractions.Services.EmailServices;
 using LMS.Common.Enums;
+using LMS.Domain.Enums.Commons;
 
 namespace LMS.Infrastructure.Services.Helpers
 {
     public class EmailTemplateReaderService : IEmailTemplateReaderService
     {
-        public string? ReadTemplate(SupportedLanguages language, EmailPurpose purpose)
+        public string? ReadTemplate(Language language, EmailPurpose purpose)
         {
             string templateString = string.Empty;
 
@@ -23,3 +24,7 @@ namespace LMS.Infrastructure.Services.Helpers
         }
     }
 }
+
+/*
+ D:\\Library Management System\\LMS\\LMS.API\\bin\\Debug\\net9.0\\Resources\\EmailTemplates\\AR\\AccountVerificationTemplate.html
+ */

@@ -24,15 +24,9 @@
 
 	<ItemGroup>
 		<Content Include="Resources\EmailTemplates\**\*.html">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Content Remove="Resources\EmailTemplates\AR\PasswordResetTemplate.html" />
-	  <Content Remove="Resources\EmailTemplates\AR\RegistrationVerificationTemplate.html" />
-	  <Content Remove="Resources\EmailTemplates\EN\PasswordResetTemplate.html" />
-	  <Content Remove="Resources\EmailTemplates\EN\RegistrationVerificationTemplate.html" />
-	</ItemGroup>
-	
+
 </Project>

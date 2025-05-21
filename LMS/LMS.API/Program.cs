@@ -1,50 +1,77 @@
+using System.Text.Json.Serialization;
+using Microsoft.IdentityModel.Tokens;
+using LMS.Application.Abstractions.Services.Authentication;
+using LMS.Application.Abstractions.Services.EmailSender;
+using LMS.Application.Abstractions.Services.EmailServices;
+using LMS.Application.Abstractions.Services.Helpers;
+using LMS.Application.Abstractions.Services.ImagesServices;
+using LMS.Application.Features.Authentication.Register.Commands.CreateTempAccount;
+using LMS.Application.Settings;
+using LMS.Common.Settings;
+using LMS.Domain.Abstractions;
 using LMS.Domain.Abstractions.Repositories;
-using LMS.Domain.Entities.Financial.Levels;
 using LMS.Domain.Entities.Financial;
+using LMS.Domain.Entities.Financial.Levels;
 using LMS.Domain.Entities.HR;
 using LMS.Domain.Entities.Orders;
+using LMS.Domain.Entities.Stock;
 using LMS.Domain.Entities.Stock.Authors;
 using LMS.Domain.Entities.Stock.Genres;
 using LMS.Domain.Entities.Stock.Products;
 using LMS.Domain.Entities.Stock.Publishers;
-using LMS.Domain.Entities.Stock;
 using LMS.Domain.Entities.Users;
 using LMS.Infrastructure.DbContexts;
-using LMS.Infrastructure.Repositories.Financial.Levels;
 using LMS.Infrastructure.Repositories.Financial;
+using LMS.Infrastructure.Repositories.Financial.Levels;
 using LMS.Infrastructure.Repositories.HR;
 using LMS.Infrastructure.Repositories.OrderManagement;
 using LMS.Infrastructure.Repositories.Orders;
+using LMS.Infrastructure.Repositories.Stock;
 using LMS.Infrastructure.Repositories.Stock.Authors;
 using LMS.Infrastructure.Repositories.Stock.Genres;
 using LMS.Infrastructure.Repositories.Stock.Products;
 using LMS.Infrastructure.Repositories.Stock.Publishers;
-using LMS.Infrastructure.Repositories.Stock;
 using LMS.Infrastructure.Repositories.Users;
-using Microsoft.EntityFrameworkCore;
-using LMS.Application.Abstractions.Services.Authentication;
-using LMS.Infrastructure.Services.Authentication;
-using LMS.Infrastructure.Services.Authentication.OtpCodes;
 using LMS.Infrastructure.Services.Authentication.Token;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using LMS.Application.Abstractions.Services.EmailSender;
 using LMS.Infrastructure.Services.Comunitcation;
-using LMS.Application.Abstractions.Services.EmailServices;
 using LMS.Infrastructure.Services.Helpers;
-using Org.BouncyCastle.Crypto.Prng;
-using LMS.Application.Abstractions.Services.Helpers;
-using LMS.Application.Abstractions.Services.ImagesServices;
 using LMS.Infrastructure.Services.Image;
-using LMS.Domain.Abstractions;
 using LMS.Infrastructure.UnitOfWorks;
-using LMS.Application.Features.Authentication.Register.Commands.CreateTempAccount;
-using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
+using Serilog;
+using System.Text;
+using LMS.Infrastructure.Services.Authentication;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Error()
+            .WriteTo.File("Logs\\logger.txt", rollingInterval: RollingInterval.Month)
+            .CreateLogger();
+
+
         var builder = WebApplication.CreateBuilder(args);
+
+        var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+        
+        builder.Services.AddAuthentication("Bearer").AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new()
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+
+
+                ValidIssuer = jwtSettings["Issuer"],
+                ValidAudience = jwtSettings["Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]!)),
+                ClockSkew = TimeSpan.Zero
+            };
+        });
 
 
         builder.Services.AddControllers();
@@ -52,6 +79,8 @@ internal class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddApplicationInsightsTelemetry();
+
+
 
         builder.Services.AddControllers()
             .AddJsonOptions(options =>
@@ -120,10 +149,14 @@ internal class Program
         builder.Services.AddScoped<ISoftDeletableRepository<FinancialRevenue>, FinancialRevenueRepository>();
         builder.Services.AddScoped<ISoftDeletableRepository<Payment>, PaymentRepository>();
 
+        builder.Services.Configure<EmailSettings>(
+            builder.Configuration.GetSection("EmailSettings"));
+
+        builder.Services.Configure<TokenSettings>(
+            builder.Configuration.GetSection("JwtSettings"));
 
         //Inject The services:
-        builder.Services.AddScoped<IAccountService, AccountService>();
-        builder.Services.AddScoped<IOtpService, OtpService>();
+        builder.Services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
         builder.Services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
         builder.Services.AddScoped<ITokenReaderService, TokenReaderService>();
         builder.Services.AddScoped<IEmailSenderService, EmailSenderService>();

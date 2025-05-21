@@ -2,8 +2,8 @@
 {
     public enum EmailPurpose
     {
-        AccountVerificationTemplate = 0,
-        PasswordResetTemplate = 1,
-        RegistrationVerificationTemplate = 2
+        TowFactorAuthTemplate = 0,
+        RegistrationVerificationTemplate = 1,
+        PasswordResetTemplate = 2
     }
 }

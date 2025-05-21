@@ -1,7 +1,5 @@
 ﻿using LMS.Application.Abstractions.Services.Authentication;
 using LMS.Common.Enums;
-using LMS.Common.Exceptions;
-using LMS.Common.Extensions;
 using LMS.Common.Results;
 using LMS.Domain.Abstractions.Repositories;
 using LMS.Domain.Entities.Users;
@@ -12,17 +10,17 @@ namespace LMS.Application.Features.Authentication.OtpCodes.Commands.VerifyOtpCod
 {
     public class VerifyOtpCodeCommandHandler : IRequestHandler<VerifyOtpCodeCommand, Result>
     {
-        private readonly IOtpService _otpService;
+        private readonly IAuthenticationHelper _authenticationHelper;
         private readonly ISoftDeletableRepository<User> _userRepo;
         private readonly ILogger<OtpCode> _logger;
 
 
         public VerifyOtpCodeCommandHandler(
-            IOtpService otpService,
+            IAuthenticationHelper authenticationHelper,
             ISoftDeletableRepository<User> userRepo,
             ILogger<OtpCode> logger)
         {
-            _otpService = otpService;
+            _authenticationHelper = authenticationHelper;
             _userRepo = userRepo;
             _logger = logger;
         }
@@ -31,35 +29,14 @@ namespace LMS.Application.Features.Authentication.OtpCodes.Commands.VerifyOtpCod
 
         public async Task<Result> Handle(VerifyOtpCodeCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userRepo.GetByExpressionAsync(user => user.Email.ToNormalize() == request.Email.ToNormalize());
+            var user = await _userRepo.GetByExpressionAsync(user => user.Email.ToLower().Trim() == request.Email.ToLower().Trim());
 
             if (user is null)
             {
                 return Result.Failure(ResponseStatus.ACCOUNT_NOT_FOUND);
             }
 
-            Result verifyResult;
-
-            try
-            {
-                verifyResult = await _otpService.VerifyCodeAsync(user.UserId, request.Code, request.CodeType);
-            }
-            catch (DatabaseException ex)
-            {
-                _logger.LogError($"Error while deleting the code for user : {user.UserName}, \n" +
-                    $"Error message: {ex.Message}, \n" +
-                    $"Error Code : {ex.SqlErrorCode}\n" +
-                    $"------------------------------------------------------------------------------------\n");
-                return Result.Failure(ResponseStatus.CODE_ERROR);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error while deleting the code for user : {user.UserName}, \n" +
-                    $"Error message: {ex.Message}, \n" +
-                    $"------------------------------------------------------------------------------------\n");
-
-                return Result.Failure(ResponseStatus.CODE_ERROR);
-            }
+            Result verifyResult = await _authenticationHelper.VerifyCodeAsync(user.UserId, request.Code, request.CodeType);
 
             return verifyResult;
         }
