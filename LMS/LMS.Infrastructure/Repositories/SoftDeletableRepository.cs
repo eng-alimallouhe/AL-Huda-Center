@@ -45,6 +45,12 @@ namespace LMS.Infrastructure.Repositories
             return await _dbSet.FindAsync(id);
         }
 
+        public IQueryable<TEntity> AsQueryable()
+        {
+            _dbSet.AsQueryable();
+            return _dbSet.AsQueryable();
+        }
+
         public async Task<TEntity> AddAsync(TEntity entity)
         {
             try

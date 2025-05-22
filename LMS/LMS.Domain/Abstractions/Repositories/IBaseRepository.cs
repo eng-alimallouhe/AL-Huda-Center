@@ -8,6 +8,7 @@ namespace LMS.Domain.Abstractions.Repositories
         Task<ICollection<TEntity>> GetAllAsync(ISpecification<TEntity> specification);
         Task<TEntity?> GetBySpecificationAsync(ISpecification<TEntity> specification);
         Task<TEntity?> GetByExpressionAsync(Expression<Func<TEntity, bool>> expression);
+        IQueryable<TEntity> AsQueryable();
         Task<TEntity?> GetByIdAsync(Guid id);
         Task<TEntity> AddAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);

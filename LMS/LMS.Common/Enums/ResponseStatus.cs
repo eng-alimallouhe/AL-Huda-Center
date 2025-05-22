@@ -42,6 +42,10 @@
         SOURCE_NOT_FOUND,
         FILE_NOT_FOUND,
         TASK_COMPLETED,
-        HTTP_RESPONSE_ERROR
+        HTTP_RESPONSE_ERROR,
+
+
+        //Department Response:
+        DEPARTMENT_NOT_FOUNDED
     }
 }

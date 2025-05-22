@@ -9,7 +9,7 @@ namespace LMS.Domain.Entities.Users
 
 
         public required string DepartmentName { get; set; } 
-        public required string Description { get; set; }
+        public required string DepartmentDescription { get; set; }
 
 
         //soft delete:

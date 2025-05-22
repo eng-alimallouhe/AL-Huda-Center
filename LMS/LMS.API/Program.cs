@@ -41,6 +41,9 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System.Text;
 using LMS.Infrastructure.Services.Authentication;
+using LMS.API.Middlewares;
+using LMS.Application.Abstractions.Services.Admin;
+using LMS.Infrastructure.Services.Admin;
 
 internal class Program
 {
@@ -149,14 +152,18 @@ internal class Program
         builder.Services.AddScoped<ISoftDeletableRepository<FinancialRevenue>, FinancialRevenueRepository>();
         builder.Services.AddScoped<ISoftDeletableRepository<Payment>, PaymentRepository>();
 
+        
         builder.Services.Configure<EmailSettings>(
             builder.Configuration.GetSection("EmailSettings"));
 
+        
         builder.Services.Configure<TokenSettings>(
             builder.Configuration.GetSection("JwtSettings"));
 
+
         //Inject The services:
         builder.Services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
+        builder.Services.AddScoped<IDepartmentHelper, DepartmentHelper>();
         builder.Services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
         builder.Services.AddScoped<ITokenReaderService, TokenReaderService>();
         builder.Services.AddScoped<IEmailSenderService, EmailSenderService>();
@@ -183,6 +190,8 @@ internal class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
+
+        app.UseMiddleware<ExceptionHandlingMiddleware>();
 
         app.MapControllers();
 
