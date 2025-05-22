@@ -164,6 +164,7 @@ internal class Program
         //Inject The services:
         builder.Services.AddScoped<IAuthenticationHelper, AuthenticationHelper>();
         builder.Services.AddScoped<IDepartmentHelper, DepartmentHelper>();
+        builder.Services.AddScoped<IEmployeeHelper, EmployeeHelper>();
         builder.Services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
         builder.Services.AddScoped<ITokenReaderService, TokenReaderService>();
         builder.Services.AddScoped<IEmailSenderService, EmailSenderService>();

@@ -5,7 +5,7 @@ using LMS.Domain.Abstractions.Repositories;
 using LMS.Domain.Entities.Users;
 using MediatR;
 
-namespace LMS.Application.Features.Admin.Departments.Command.CreateDepartment
+namespace LMS.Application.Features.Admin.Departments.Command.UpdateDepartment
 {
     public class UpdateDepartmentCommandHandler : IRequestHandler<UpdateDepartmentCommand, Result>
     {

@@ -9,8 +9,10 @@ namespace LMS.Domain.Entities.Financial
         //Primary Key:
         public Guid FinancialRevenueId { get; set; }
 
+        
         //Foreign Key: CustomerId ==> one(Customer)-to-many(Payment) relationship
         public Guid CustomerId { get; set; }
+
 
         //Foreign Key: EmployeeId ==> one(Employee)-to-many(PrintOrder) relationship
         public Guid EmployeeId { get; set; }
@@ -20,12 +22,15 @@ namespace LMS.Domain.Entities.Financial
         public PaymentStatus PaymentStatus { get; set; }
         public Service Service { get; set; }
         
+        
         //Soft Delete:
         public bool IsActive { get; set; }
+
 
         //Timestamp:
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+
 
         //Navigation Property: 
         public Customer Customer { get; set; }

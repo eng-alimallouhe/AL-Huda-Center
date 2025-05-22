@@ -47,7 +47,7 @@ namespace LMS.Domain.Entities.Users
         {
             UserId = Guid.NewGuid();
             HashedPassword = string.Empty;
-            ProfilePictureUrl = string.Empty;
+            ProfilePictureUrl = "https://i.imgur.com/IKv7CE0.jpeg";
             FailedLoginAttempts = 0;
             LastLogIn = DateTime.UtcNow;
             CreatedAt = DateTime.UtcNow;
