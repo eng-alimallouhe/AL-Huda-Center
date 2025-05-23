@@ -9,7 +9,7 @@ namespace LMS.Application.Features.Admin.Employees.Command.CreateDepartment
         string FullName,
         string Email,
         string Phonenumber,
-        string ProfilePictureUrl,
         Language Language,
-        Guid DepartmentId) : IRequest<Result<EmployeeCreatignResultDto>>;
+        Guid DepartmentId,
+        string? ProfilePictureUrl = " ") : IRequest<Result<EmployeeCreatignResultDto>>;
 }

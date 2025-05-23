@@ -17,7 +17,7 @@ namespace LMS.Infrastructure.Configurations.Users
                     .IsRequired()
                     .HasMaxLength(100);
             
-            builder.Property(d => d.Description)
+            builder.Property(d => d.DepartmentDescription)
                     .IsRequired()
                     .HasMaxLength(512);
             

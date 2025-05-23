@@ -33,6 +33,7 @@
         public EmployeeDepartment()
         {
             EmployeeDepartmentId = Guid.NewGuid();
+            StartDate = DateTime.UtcNow;
             IsActive = true;
             Employee = null!;
             Department = null!;

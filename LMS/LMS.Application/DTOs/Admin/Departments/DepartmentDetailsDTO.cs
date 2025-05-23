@@ -6,7 +6,7 @@ namespace LMS.Application.DTOs.Admin.Departments
     public class DepartmentDetailsDTO
     {
         public string DepartmentName { get; set; }= string.Empty;
-        public string Description { get; set; } = string.Empty;
+        public string DepartmentDescription { get; set; } = string.Empty;
 
         public ICollection<EmployeeOverviewDto> CurrentEmployees { get; set; } = [];
         public ICollection<EmployeeOverviewDto> FormerEmployees { get; set; } = [];

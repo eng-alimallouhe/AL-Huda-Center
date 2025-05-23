@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using AutoMapper;
-using LMS.Application.Abstractions.Services.Admin;
+﻿using LMS.Application.Abstractions.Services.Admin;
 using LMS.Application.DTOs.Admin.Employees;
 using LMS.Common.Enums;
 using LMS.Common.Results;
@@ -15,17 +13,20 @@ namespace LMS.Infrastructure.Services.Admin
         private readonly ISoftDeletableRepository<Employee> _employeeRepo;
         private readonly ISoftDeletableRepository<Department> _departmenRepo;
         private readonly ISoftDeletableRepository<User> _userRepo;
+        private readonly ISoftDeletableRepository<Role> _roleRepo;
 
         public EmployeeHelper(
             ISoftDeletableRepository<EmployeeDepartment> empDepRepo,
             ISoftDeletableRepository<Employee> employeeRepo,
             ISoftDeletableRepository<Department> departmentRepo,
-            ISoftDeletableRepository<User> userRepo)
+            ISoftDeletableRepository<User> userRepo,
+            ISoftDeletableRepository<Role> roleRepo)
         {
             _empDepRepo = empDepRepo;
             _departmenRepo = departmentRepo;
             _employeeRepo = employeeRepo;
             _userRepo = userRepo;
+            _roleRepo = roleRepo;
         }
 
         public async Task<Result<EmployeeCreatignResultDto>> CreateEmployee(Employee employee, Guid departmenId)
@@ -44,6 +45,17 @@ namespace LMS.Infrastructure.Services.Admin
             employee.HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
 
             employee.UserName = await GenerateRandomUserName(employee.FullName);
+
+            var employeesRole = await _roleRepo.GetByExpressionAsync(role => 
+                role.RoleType.ToLower() == "employee");
+
+            if (employeesRole is null)
+            {
+                return Result<EmployeeCreatignResultDto>.Failure(ResponseStatus.SOURCE_NOT_FOUND);
+            }
+
+            employee.RoleId = employeesRole.RoleId;
+            employee.Role = employeesRole;
 
             await _employeeRepo.AddAsync(employee);
 

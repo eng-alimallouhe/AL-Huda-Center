@@ -24,7 +24,7 @@ namespace LMS.Application.Features.Admin.Employees.Queries.GetAllGetAllEmployees
         {
             var employees = await _employeeRepo.GetAllAsync(new Specification<Employee>(
                 criteria: employee => employee.IsDeleted != true,
-                includes: [employee => employee.EmployeeDepartments.Where(ed => ed.IsActive).Select(ed => ed.Department)]
+                includes: ["EmployeeDepartments.Department"]
                 ));
 
             return _mapper.Map<ICollection<EmployeeOverviewDto>>(employees);

@@ -20,12 +20,14 @@ using LMS.Infrastructure.Configurations.Financial;
 using LMS.Infrastructure.Configurations.Financial.Levels;
 using Microsoft.EntityFrameworkCore;
 using LMS.Infrastructure.Configurations.Stock.Categories;
+using LMS.Domain.Entities.HttpEntities;
 
 namespace LMS.Infrastructure.DbContexts
 {
     public class LMSDbContext : DbContext
     {
         // Users Namespace
+        public DbSet<ImgeURToken> ImgeURTokens { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }

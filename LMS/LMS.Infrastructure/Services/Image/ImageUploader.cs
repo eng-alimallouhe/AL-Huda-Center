@@ -3,8 +3,9 @@ using System.Text.Json;
 using LMS.Application.Abstractions.Services.ImagesServices;
 using LMS.Common.Enums;
 using LMS.Common.Results;
-
-
+using LMS.Domain.Abstractions.Repositories;
+using LMS.Domain.Abstractions.Specifications;
+using LMS.Domain.Entities.HttpEntities;
 using Microsoft.Extensions.Configuration;
 
 
@@ -13,69 +14,77 @@ namespace LMS.Infrastructure.Services.Image
     public class ImageUploader : IImageUploader
     {
         private readonly HttpClient _httpClient;
-        private readonly string? _clientId;
+        private readonly IImageAuthService _authService;
+        private readonly IBaseRepository<ImgeURToken> _tokenRepo;
 
-
-        public ImageUploader(HttpClient httpClient, IConfiguration configuration)
+        public ImageUploader(
+            HttpClient httpClient,
+            IImageAuthService authService,
+            IBaseRepository<ImgeURToken> tokenRepo)
         {
             _httpClient = httpClient;
-            _clientId = configuration["Imgur:ClientId"] ?? null;
+            _authService = authService;
+            _tokenRepo = tokenRepo;
         }
 
         public async Task<Result<string>> UploadImageAsync(Stream imageStream, string fileName)
         {
+            var tokenInfo = await _tokenRepo.GetBySpecificationAsync(new Specification<ImgeURToken>());
+
+            var result = await TryUploadAsync(imageStream, fileName, tokenInfo!.AccessToken);
+
+            if (result.Status == ResponseStatus.ACTIVATION_FAILED)
+            {
+                var refreshResult = await _authService.RefreshAccessTokenAsync(tokenInfo.RefreshToken);
+                if (!refreshResult.IsSuccess) return Result<string>.Failure(refreshResult.Status);
+
+                var (newAccess, newRefresh) = refreshResult.Value!;
+                tokenInfo.AccessToken = newAccess;
+                tokenInfo.RefreshToken = newRefresh;
+                await _tokenRepo.UpdateAsync(tokenInfo);
+
+                result = await TryUploadAsync(imageStream, fileName, newAccess);
+            }
+
+            return result;
+        }
+
+
+        private async Task<Result<string>> TryUploadAsync(Stream imageStream, string fileName, string accessToken)
+        {
             try
             {
-                if (imageStream == null || !imageStream.CanRead || string.IsNullOrWhiteSpace(fileName))
-                    return Result<string>.Failure(ResponseStatus.FILE_NOT_FOUND);
-
-
+                imageStream.Position = 0;
+                
                 using var content = new MultipartFormDataContent();
+                
                 using var imageContent = new StreamContent(imageStream);
-
-                string contentType = GetContentType(fileName);
-                imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse(contentType);
+                
+                imageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+                
                 content.Add(imageContent, "image", fileName);
 
-
                 _httpClient.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Client-ID", _clientId);
-
+                    new AuthenticationHeaderValue("Bearer", accessToken);
 
                 var response = await _httpClient.PostAsync("https://api.imgur.com/3/image", content);
+
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                    return Result<string>.Failure(ResponseStatus.ACTIVATION_FAILED);
+
                 response.EnsureSuccessStatusCode();
 
-
                 var responseString = await response.Content.ReadAsStringAsync();
+                var json = JsonDocument.Parse(responseString);
+                var link = json.RootElement.GetProperty("data").GetProperty("link").GetString();
 
-
-                using var json = JsonDocument.Parse(responseString);
-                if (json.RootElement.TryGetProperty("data", out var data) &&
-                    data.TryGetProperty("link", out var link))
-                {
-                    return Result<string>.Success(link.GetString()!, ResponseStatus.TASK_COMPLETED);
-                }
-
-                return Result<string>.Failure(ResponseStatus.HTTP_RESPONSE_ERROR);
+                return Result<string>.Success(link!, ResponseStatus.TASK_COMPLETED);
             }
             catch
             {
                 return Result<string>.Failure(ResponseStatus.HTTP_RESPONSE_ERROR);
             }
         }
-
-        private string GetContentType(string fileName)
-        {
-            string extension = Path.GetExtension(fileName).ToLower();
-            return extension switch
-            {
-                ".jpg" or ".jpeg" => "image/jpeg",
-                ".png" => "image/png",
-                ".gif" => "image/gif",
-                ".bmp" => "image/bmp",
-                ".webp" => "image/webp",
-                _ => "image/jpeg"
-            };
-        }
     }
+
 }

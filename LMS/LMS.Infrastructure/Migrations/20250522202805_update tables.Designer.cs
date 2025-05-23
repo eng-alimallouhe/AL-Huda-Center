@@ -4,6 +4,7 @@ using LMS.Infrastructure.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LMS.Infrastructure.Migrations
 {
     [DbContext(typeof(LMSDbContext))]
-    partial class LMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250522202805_update tables")]
+    partial class updatetables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -390,25 +393,6 @@ namespace LMS.Infrastructure.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("Salaries", (string)null);
-                });
-
-            modelBuilder.Entity("LMS.Domain.Entities.HttpEntities.ImgeURToken", b =>
-                {
-                    b.Property<Guid>("ImgeURTokenId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AccessToken")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RefreshToken")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ImgeURTokenId");
-
-                    b.ToTable("ImgeURTokens");
                 });
 
             modelBuilder.Entity("LMS.Domain.Entities.Orders.BaseOrder", b =>

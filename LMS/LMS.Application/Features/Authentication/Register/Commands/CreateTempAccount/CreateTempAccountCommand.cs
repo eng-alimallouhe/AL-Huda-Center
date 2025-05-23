@@ -1,5 +1,4 @@
-﻿using LMS.Common.Exceptions;
-using LMS.Common.Results;
+﻿using LMS.Common.Results;
 using MediatR;
 
 namespace LMS.Application.Features.Authentication.Register.Commands.CreateTempAccount
@@ -9,24 +8,7 @@ namespace LMS.Application.Features.Authentication.Register.Commands.CreateTempAc
         string UserName, 
         string PhoneNumber,
         string Email, 
-        string Password, 
-        int Language) : IRequest<Result>;
+        string Password,
+        int Language,
+        string? ProfilePictureUrl = " ") : IRequest<Result>;
 }
-
-
-/*
- طيب خطرلي شي تاني 
-اول الشي الفرونت بيرسل طلب لانشاء حساب مؤقت 
-بتم انشاء الحساب المؤقت بعد التاكد ان الايميل واسم المستخدم غير موجودين 
-ومن ثم يقوم يرسل طلب لارسال الكود بعد ان يتم الرد عليه بنجاح من طلب انشاء الحساب المؤقت 
-يتم ارسال الرمز ومن ثم يتم اعادة نجاح للفرونت 
-يقوم الفرونت بنقل المستخدم لصفحة ادخال الرمز 
-يدخل المستخدم الرمز 
-ومن ثم يرسله الفرونت للباك للتحقق منه لنفرض ان الرمز يحقق المعايير 
-يتم تحديث حالة الكود لمستخدم 
-ويرد الباك بنجاح للفرونت 
-عندما يتلقى الفرونت الطلب ينقل المستخدم لصفحة تسجيل الدخول يدخل اسمه وكلمة السر ويرسل للباك 
-الباك يتلقى الطلب 
-يبحث عن المستخدم ويسترجع المستخدم مع الكود المرتبط به 
-يتم التحقق من حالة الكود اذا كان مستخدما وكان المستخدم غير مفعل يتم تفعيل المستخدم ويسجل الدخول ويرجع الباك للفرونت التوكنات 
- */

@@ -24,7 +24,7 @@ namespace LMS.Application.Features.Admin.Departments.Queries.GetAllDepartments
         {
             var deps = await _departmentRepo.GetAllAsync(new Specification<Department>(
                 criteria: department => department.IsActive == true,
-                includes: [department => department.EmployeeDepartments]
+                includes: ["EmployeeDepartments.Employee"]
                 ));
 
             return _mapper.Map<ICollection<DepartmentOverviewDto>>(deps);

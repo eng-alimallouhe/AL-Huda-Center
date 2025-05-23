@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LMS.API.DTOs.Authentication
 {
@@ -27,5 +28,8 @@ namespace LMS.API.DTOs.Authentication
 
         [Required(ErrorMessage = "Language is required")]
         public int Language { get; set; } = 0;
+
+        [FromForm]
+        public IFormFile? ProfilePecture { get; set; }
     }
 }

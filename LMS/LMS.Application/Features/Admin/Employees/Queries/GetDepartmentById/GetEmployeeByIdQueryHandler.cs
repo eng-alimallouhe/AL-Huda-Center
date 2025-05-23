@@ -25,8 +25,8 @@ namespace LMS.Application.Features.Admin.Employees.Queries.GetEmployeeById
             var employee = await _employeeRepo.GetBySpecificationAsync(new Specification<Employee>(
                 criteria: employee => employee.UserId == request.Id,
                 includes: [
-                    employee => employee.FinancialRevenues,
-                    employee => employee.EmployeeDepartments.Select(ed => ed.Department)
+                    "FinancialRevenues",
+                    "EmployeeDepartments.Department"
                     ],
                 tracking: false
                 ));

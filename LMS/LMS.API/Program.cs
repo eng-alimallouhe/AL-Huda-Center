@@ -44,6 +44,8 @@ using LMS.Infrastructure.Services.Authentication;
 using LMS.API.Middlewares;
 using LMS.Application.Abstractions.Services.Admin;
 using LMS.Infrastructure.Services.Admin;
+using LMS.Domain.Entities.HttpEntities;
+using LMS.API.Helpers;
 
 internal class Program
 {
@@ -99,6 +101,7 @@ internal class Program
 
         // Inject the Repositories:
         // Users Repositories:
+        builder.Services.AddScoped<IBaseRepository<ImgeURToken>, ImgeURTokenRepository>();
         builder.Services.AddScoped<ISoftDeletableRepository<Role>, RoleRepository>();
         builder.Services.AddScoped<ISoftDeletableRepository<User>, UserRepositroy>();
         builder.Services.AddScoped<ISoftDeletableRepository<Department>, DepartmentRepository>();
@@ -171,6 +174,8 @@ internal class Program
         builder.Services.AddScoped<IEmailTemplateReaderService, EmailTemplateReaderService>();
         builder.Services.AddScoped<IRandomGeneratorService, RandomGeneratorService>();
         builder.Services.AddHttpClient<IImageUploader, ImageUploader>();
+        builder.Services.AddHttpClient<IImageAuthService, ImageAuthService>();
+        builder.Services.AddScoped<IApiImageUploadHelper, ApiImageUploadHelper>();
 
         //Domain Services:
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

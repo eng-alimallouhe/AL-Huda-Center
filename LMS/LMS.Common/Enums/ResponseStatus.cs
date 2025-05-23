@@ -46,6 +46,7 @@
 
 
         //Department Response:
-        DEPARTMENT_NOT_FOUNDED
+        DEPARTMENT_NOT_FOUNDED,
+        EXISTING_APPOINTMENT
     }
 }

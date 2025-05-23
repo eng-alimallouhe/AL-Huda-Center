@@ -55,10 +55,12 @@ namespace LMS.API.Controllers.Authintication
         }
 
 
-        [HttpPost("reset-password/{email}")]
-        public async Task<ActionResult<Result<AuthorizationDTO>>> ResetPassword(string email)
+        [HttpPost("reset-password")]
+        public async Task<ActionResult<Result<AuthorizationDTO>>> ResetPassword(ResetPasswordDto request)
         {
-            var response = await _mediator.Send(new ResetPasswordCommand(email));
+            var command = _mapper.Map<ResetPasswordCommand>(request);
+            
+            var response = await _mediator.Send(command);
 
             if (response.IsFailed)
             {

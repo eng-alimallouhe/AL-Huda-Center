@@ -34,7 +34,7 @@ namespace LMS.Infrastructure.Services.Admin
 
             var empDeps = await _employeeDepartmentRepo.GetAllAsync(new Specification<EmployeeDepartment>(
                 criteria: empDeps => empDeps.DepartmentId == department.DepartmentId,
-                includes: [empDeps =>  empDeps.Employee]
+                includes: ["Employee"]
                 ));
 
             var activeEmployees = empDeps.Where(empDeps => empDeps.IsActive).Select(empDeps => empDeps.Employee);

@@ -4,6 +4,7 @@ using LMS.Application.DTOs.Admin.Employees;
 using LMS.Application.DTOs.Financial;
 using LMS.Application.Features.Admin.Departments.Command.CreateDepartment;
 using LMS.Application.Features.Admin.Employees.Command.CreateDepartment;
+using LMS.Application.Features.Admin.Employees.Command.TransferEmployee;
 using LMS.Application.Features.Admin.Employees.Command.UpdateEmployee;
 using LMS.Domain.Entities.Users;
 
@@ -23,7 +24,9 @@ namespace LMS.Application.MappingProfiles.Admins
 
             CreateMap<CreateEmployeeCommand, Employee>();
 
-            CreateMap<UpdateEmployeeCommand, Employee>();
+            CreateMap<UpdateEmployeeCommand, Employee>().ReverseMap();
+
+            CreateMap<TransferEmployeeCommand, EmployeeDepartment>();
         }
     }
 

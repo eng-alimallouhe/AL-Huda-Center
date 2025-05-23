@@ -178,7 +178,7 @@ namespace LMS.Infrastructure.Services.Authentication
         {
             var user = await _userRepo.GetBySpecificationAsync(new Specification<User>(
                 criteria: user => user.Email.ToLower().Trim() == email.ToLower().Trim(),
-                includes: [user => user.OtpCode]
+                includes: ["OtpCode"]
                 ));
 
             if (user is null)
@@ -216,7 +216,6 @@ namespace LMS.Infrastructure.Services.Authentication
 
             return Result<Guid>.Success(user.UserId, ResponseStatus.ACTIVATION_SUCCESS);
         }
-
 
 
         public async Task<Result> LogIn(User user, string password)

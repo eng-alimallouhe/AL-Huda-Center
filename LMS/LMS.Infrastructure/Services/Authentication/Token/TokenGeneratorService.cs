@@ -48,7 +48,7 @@ namespace LMS.Infrastructure.Services.Authentication.Token
         {
             var user = await _userRepo.GetBySpecificationAsync(new Specification<User>(
                 criteria: user => user.UserId == userId,
-                includes: [user => user.Role]
+                includes: ["Role"]
                 ));
 
             if (user is null)
@@ -95,7 +95,7 @@ namespace LMS.Infrastructure.Services.Authentication.Token
             await _unitOfWork.BeginTransactionAsync();
             var user = await _userRepo.GetBySpecificationAsync(new Specification<User>(
                 criteria: user => user.UserId == userId,
-                includes: [user => user.RefreshToken]
+                includes: ["RefreshToken"]
                 ));
 
             // Ensure the user exists before generating a token
@@ -166,7 +166,7 @@ namespace LMS.Infrastructure.Services.Authentication.Token
         }
     
 
-        public async Task<Result<AuthorizationDTO>> ValidateTokenAsync(string accessToken, string refreshToken)
+        public async Task<Result<AuthorizationDTO>> ValidateTokenAsync(string refreshToken, string accessToken)
         {
             var userIdResult = _tokenReader.GetUserId(accessToken);
 

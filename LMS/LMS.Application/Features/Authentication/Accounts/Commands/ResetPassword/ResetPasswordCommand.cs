@@ -4,5 +4,7 @@ using MediatR;
 
 namespace LMS.Application.Features.Authentication.Accounts.Commands.ResetPassword
 {
-    public record ResetPasswordCommand(string email) : IRequest<Result<AuthorizationDTO>>;
+    public record ResetPasswordCommand(
+        string Email,
+        string NewPassword) : IRequest<Result<AuthorizationDTO>>;
 }
