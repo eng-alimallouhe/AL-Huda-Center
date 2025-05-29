@@ -1037,6 +1037,26 @@ namespace LMS.Infrastructure.Migrations
                     b.ToTable("Departments", (string)null);
                 });
 
+            modelBuilder.Entity("LMS.Domain.Entities.Users.DepartmentResponsibility", b =>
+                {
+                    b.Property<Guid>("DepartmentResponsibilityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ResponsibilityType")
+                        .HasColumnType("int");
+
+                    b.HasKey("DepartmentResponsibilityId");
+
+                    b.HasIndex("DepartmentId")
+                        .IsUnique();
+
+                    b.ToTable("DepartmentResponsibilies", (string)null);
+                });
+
             modelBuilder.Entity("LMS.Domain.Entities.Users.EmployeeDepartment", b =>
                 {
                     b.Property<Guid>("EmployeeDepartmentId")
@@ -1546,7 +1566,7 @@ namespace LMS.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("LMS.Domain.Entities.Users.Department", "Department")
-                        .WithMany("Orders")
+                        .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1718,6 +1738,17 @@ namespace LMS.Infrastructure.Migrations
                     b.HasOne("LMS.Domain.Entities.Users.Customer", null)
                         .WithMany("Addresses")
                         .HasForeignKey("CustomerId");
+                });
+
+            modelBuilder.Entity("LMS.Domain.Entities.Users.DepartmentResponsibility", b =>
+                {
+                    b.HasOne("LMS.Domain.Entities.Users.Department", "Department")
+                        .WithOne("Responsibility")
+                        .HasForeignKey("LMS.Domain.Entities.Users.DepartmentResponsibility", "DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("LMS.Domain.Entities.Users.EmployeeDepartment", b =>
@@ -1903,7 +1934,7 @@ namespace LMS.Infrastructure.Migrations
                 {
                     b.Navigation("EmployeeDepartments");
 
-                    b.Navigation("Orders");
+                    b.Navigation("Responsibility");
                 });
 
             modelBuilder.Entity("LMS.Domain.Entities.Users.User", b =>

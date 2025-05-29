@@ -105,6 +105,7 @@ internal class Program
         builder.Services.AddScoped<ISoftDeletableRepository<Role>, RoleRepository>();
         builder.Services.AddScoped<ISoftDeletableRepository<User>, UserRepositroy>();
         builder.Services.AddScoped<ISoftDeletableRepository<Department>, DepartmentRepository>();
+        builder.Services.AddScoped<IBaseRepository<DepartmentResponsibility>, DepartmentResponsibilityRepository>();
         builder.Services.AddScoped<ISoftDeletableRepository<Employee>, EmployeeRepository>();
         builder.Services.AddScoped<ISoftDeletableRepository<EmployeeDepartment>, EmployeeDepartmentRepository>();
         builder.Services.AddScoped<ISoftDeletableRepository<Customer>, CustomerRepository>();
@@ -135,9 +136,11 @@ internal class Program
 
         //Orders Repositories: 
         builder.Services.AddScoped<ISoftDeletableRepository<Order>, OrderRepository>();
+        builder.Services.AddScoped<ISoftDeletableRepository<BaseOrder>, BaseOrderRepository>();
         builder.Services.AddScoped<ISoftDeletableRepository<Shipment>, ShipmentRepository>();
         builder.Services.AddScoped<IBaseRepository<CartItem>, CartItemRepository>();
         builder.Services.AddScoped<ISoftDeletableRepository<Cart>, CartRepository>();
+        builder.Services.AddScoped<ISoftDeletableRepository<OrderItem>, OrderItemRepository>();
 
 
         //HR Repositories:

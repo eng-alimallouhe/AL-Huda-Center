@@ -4,7 +4,8 @@ using LMS.Infrastructure.DbContexts;
 
 namespace LMS.Infrastructure.Repositories.Users
 {
-    public class RoleRepository : SoftDeletableRepository<Role>
+    public class RoleRepository
+        : SoftDeletableRepository<Role>
     {
         private readonly LMSDbContext _context;
         public RoleRepository(LMSDbContext context) : base(context)

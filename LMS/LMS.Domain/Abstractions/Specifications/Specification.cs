@@ -2,7 +2,9 @@
 
 namespace LMS.Domain.Abstractions.Specifications
 {
-    public class Specification<TEntity> : ISpecification<TEntity> where TEntity : class
+    public class Specification<TEntity> 
+        : ISpecification<TEntity> 
+        where TEntity : class
     {
         public Specification(
             Expression<Func<TEntity, bool>>? criteria = null,

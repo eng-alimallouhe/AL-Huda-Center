@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using LMS.Common.Exceptions;
+using LMS.Common.Results;
 using LMS.Domain.Abstractions.Repositories;
 using LMS.Domain.Abstractions.Specifications;
 using LMS.Infrastructure.DbContexts;
@@ -9,7 +10,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LMS.Infrastructure.Repositories
 {
-    public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    public abstract class BaseRepository<TEntity> 
+        : IBaseRepository<TEntity> 
+        where TEntity : class
     {
         private readonly LMSDbContext _context;
         private readonly DbSet<TEntity> _dbSet;
@@ -26,11 +29,21 @@ namespace LMS.Infrastructure.Repositories
             return await query.ToListAsync();
         }
 
+
+        public async Task<ICollection<TResult>> GetAllProjectedAsync<TResult, TKey>(IProjectedSpecification<TEntity, TResult, TKey> specification)
+        {
+            var query = SpecificationQueryBuilder.GetQuery<TEntity, TResult, TKey>(_dbSet, specification);
+            return await query.ToListAsync();
+        }
+
+
         public async Task<TEntity?> GetBySpecificationAsync(ISpecification<TEntity> specification)
         {
             var query = SpecificationQueryBuilder.GetQuery(_dbSet, specification);
             return await query.FirstOrDefaultAsync();
         }
+
+
 
         public async Task<TEntity?> GetByExpressionAsync(Expression<Func<TEntity, bool>> expression)
         {

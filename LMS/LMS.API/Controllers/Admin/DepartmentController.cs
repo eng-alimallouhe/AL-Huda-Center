@@ -60,10 +60,7 @@ namespace LMS.API.Controllers.Admin
         [HttpPost("update-department/{id:guid}")]
         public async Task<ActionResult<Result>> UpdateDepartment([FromBody]DepartmentRequestDto request, Guid id)
         {
-            var command = new UpdateDepartmentCommand(
-                id,
-                request.DepartmentName,
-                request.DepartmentDescription);
+            var command = _mapper.Map<UpdateDepartmentCommand>(request);
 
             var response = await _mediator.Send(command);
 

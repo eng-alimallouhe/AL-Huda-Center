@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LMS.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initialmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,7 +45,7 @@ namespace LMS.Infrastructure.Migrations
                 {
                     DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DepartmentName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
+                    DepartmentDescription = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -67,6 +67,19 @@ namespace LMS.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Genres", x => x.GenreId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ImgeURTokens",
+                columns: table => new
+                {
+                    ImgeURTokenId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AccessToken = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ImgeURTokens", x => x.ImgeURTokenId);
                 });
 
             migrationBuilder.CreateTable(
@@ -205,6 +218,25 @@ namespace LMS.Infrastructure.Migrations
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DepartmentResponsibilies",
+                columns: table => new
+                {
+                    DepartmentResponsibilityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ResponsibilityType = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DepartmentResponsibilies", x => x.DepartmentResponsibilityId);
+                    table.ForeignKey(
+                        name: "FK_DepartmentResponsibilies_Departments_DepartmentId",
+                        column: x => x.DepartmentId,
+                        principalTable: "Departments",
+                        principalColumn: "DepartmentId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -1107,6 +1139,12 @@ namespace LMS.Infrastructure.Migrations
                 column: "LevelId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DepartmentResponsibilies_DepartmentId",
+                table: "DepartmentResponsibilies",
+                column: "DepartmentId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Discounts_ProductId",
                 table: "Discounts",
                 column: "ProductId");
@@ -1275,6 +1313,9 @@ namespace LMS.Infrastructure.Migrations
                 name: "CateofyTranslations");
 
             migrationBuilder.DropTable(
+                name: "DepartmentResponsibilies");
+
+            migrationBuilder.DropTable(
                 name: "EmployeesDepartments");
 
             migrationBuilder.DropTable(
@@ -1282,6 +1323,9 @@ namespace LMS.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "GenreTranslations");
+
+            migrationBuilder.DropTable(
+                name: "ImgeURTokens");
 
             migrationBuilder.DropTable(
                 name: "Incentives");

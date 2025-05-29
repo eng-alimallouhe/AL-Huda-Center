@@ -1,5 +1,5 @@
 ﻿using LMS.Domain.Entities.Orders;
-using LMS.Domain.Enums.Orders;
+using LMS.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -20,8 +20,6 @@ namespace LMS.Infrastructure.Configurations.Orders
             builder.Property(bo => bo.EmployeeId)
                     .IsRequired(false);
 
-            builder.Property(bo => bo.DepartmentId)
-                    .IsRequired();
 
             builder.Property(bo => bo.Status)
                     .IsRequired();
@@ -47,13 +45,15 @@ namespace LMS.Infrastructure.Configurations.Orders
 
 
             builder.HasOne(bo => bo.Department)
-                    .WithMany(d => d.Orders)
+                    .WithMany()
                     .HasForeignKey(bo => bo.DepartmentId)
                     .OnDelete(DeleteBehavior.Restrict);
+
 
             builder.HasOne(bo => bo.Employee)
                     .WithMany(e => e.Orders)
                     .HasForeignKey( bo => bo.EmployeeId)
+                    .IsRequired(false)
                     .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(bo => bo.Customer)

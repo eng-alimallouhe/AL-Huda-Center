@@ -2,7 +2,8 @@
 
 namespace LMS.Domain.Abstractions.Specifications
 {
-    public interface ISpecification<TEntity> where TEntity : class
+    public interface ISpecification<TEntity> 
+        where TEntity : class
     {
         Expression<Func<TEntity, bool>>? Criteria { get; }
         List<string> Includes { get; }

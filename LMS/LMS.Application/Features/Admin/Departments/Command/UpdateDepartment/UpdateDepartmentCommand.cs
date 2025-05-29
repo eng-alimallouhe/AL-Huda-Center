@@ -1,10 +1,12 @@
 ﻿using LMS.Common.Results;
+using LMS.Domain.Enums.Users;
 using MediatR;
 
 namespace LMS.Application.Features.Admin.Departments.Command.UpdateDepartment
 {
     public record UpdateDepartmentCommand(
-        Guid DepartmentId, 
         string DepartmentName, 
-        string DepartmentDescription) : IRequest<Result>;
+        string DepartmentDescription,
+        Guid? DepartmentId, 
+        ResponsibilityType ResponsibilityType) : IRequest<Result>;
 }

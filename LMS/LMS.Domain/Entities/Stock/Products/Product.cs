@@ -2,11 +2,10 @@
 using LMS.Domain.Entities.Stock.Categories;
 namespace LMS.Domain.Entities.Stock.Products
 {
-    public class Product
+    public class    Product
     {
         // Primary key:
         public Guid ProductId { get; set; }
-
 
         public decimal ProductPrice { get; set; }
         public int ProductStock { get; set; }

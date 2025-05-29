@@ -47,6 +47,8 @@
 
         //Department Response:
         DEPARTMENT_NOT_FOUNDED,
-        EXISTING_APPOINTMENT
+        EXISTING_APPOINTMENT,
+        USED_REPOSNSIBILITY,
+        SAME_DETAIL // when the new department reponsibilty is same old 
     }
 }

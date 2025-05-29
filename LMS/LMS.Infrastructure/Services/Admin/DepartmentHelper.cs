@@ -29,9 +29,6 @@ namespace LMS.Infrastructure.Services.Admin
         {
             var departmentDetails = _mapper.Map<DepartmentDetailsDTO>(department);
 
-
-            departmentDetails.CurrentOrders = _mapper.Map<ICollection<OrderOverviewDto>>(department.Orders);
-
             var empDeps = await _employeeDepartmentRepo.GetAllAsync(new Specification<EmployeeDepartment>(
                 criteria: empDeps => empDeps.DepartmentId == department.DepartmentId,
                 includes: ["Employee"]

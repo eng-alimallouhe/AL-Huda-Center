@@ -23,6 +23,7 @@ namespace LMS.Infrastructure.Services.Authentication.Token
         private readonly TokenSettings _tokenSettings;
         private readonly ITokenReaderService _tokenReader;
         private readonly ISoftDeletableRepository<User> _userRepo;
+        private readonly ISoftDeletableRepository<EmployeeDepartment> _empDepRepo;
         private readonly ILogger<TokenGeneratorService> _logger;
         private readonly IBaseRepository<RefreshToken> _refreshRepo;
         private readonly IUnitOfWork _unitOfWork;
@@ -31,6 +32,7 @@ namespace LMS.Infrastructure.Services.Authentication.Token
             IOptions<TokenSettings> options,
             ITokenReaderService tokenReader,
             ISoftDeletableRepository<User> userRepo,
+            ISoftDeletableRepository<EmployeeDepartment> empDepRepo,
             ILogger<TokenGeneratorService> logger,
             IBaseRepository<RefreshToken> refreshRepo,
             IUnitOfWork unitOfWork)
@@ -38,6 +40,7 @@ namespace LMS.Infrastructure.Services.Authentication.Token
             _tokenSettings = options.Value;
             _tokenReader = tokenReader;
             _userRepo = userRepo;
+            _empDepRepo = empDepRepo;
             _logger = logger;
             _refreshRepo = refreshRepo;
             _unitOfWork = unitOfWork;
@@ -64,7 +67,7 @@ namespace LMS.Infrastructure.Services.Authentication.Token
 
 
             // Define user claims to be included in the token
-            var claims = new[]
+            var claims = new List<Claim>()
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserId.ToString()), // User ID
                 new Claim(JwtRegisteredClaimNames.Email, user.Email), // User email
@@ -72,15 +75,31 @@ namespace LMS.Infrastructure.Services.Authentication.Token
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()) // Unique identifier for the token
             };
 
+            if (user.Role.RoleType.ToLower() == "employee")
+            {
+                var employeeDepartment = await _empDepRepo.GetBySpecificationAsync(new Specification<EmployeeDepartment>(
+                    criteria: empDep => empDep.EmployeeId == userId 
+                        && empDep.IsActive == true
+                    ));
 
-            // Create the JWT token
-            var token = new JwtSecurityToken(
-                issuer: _tokenSettings.Issure,
-                audience: _tokenSettings.Audience,
-                claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(30),
-                signingCredentials: credentials
-            );
+                if (employeeDepartment is not null)
+                {
+                    claims.Add(new Claim("DepartmentId", employeeDepartment.DepartmentId.ToString()));
+                }
+            }
+            else
+            {
+                claims.Add(new Claim("DepartmentId", Guid.Empty.ToString()));
+            }
+
+                // Create the JWT token
+                var token = new JwtSecurityToken(
+                    issuer: _tokenSettings.Issure,
+                    audience: _tokenSettings.Audience,
+                    claims: claims,
+                    expires: DateTime.UtcNow.AddMinutes(30),
+                    signingCredentials: credentials
+                );
 
 
             // Serialize and return the token

@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using LMS.Common.Exceptions;
 using LMS.Domain.Abstractions.Repositories;
 using LMS.Domain.Abstractions.Specifications;
@@ -7,11 +6,12 @@ using LMS.Infrastructure.DbContexts;
 using LMS.Infrastructure.Specifications;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace LMS.Infrastructure.Repositories
 {
-    public abstract class SoftDeletableRepository<TEntity> : ISoftDeletableRepository<TEntity> where TEntity : class
+    public abstract class SoftDeletableRepository<TEntity> 
+        : ISoftDeletableRepository<TEntity> 
+        where TEntity : class
     {
         private readonly LMSDbContext _context;
         private readonly DbSet<TEntity> _dbSet;
@@ -28,11 +28,19 @@ namespace LMS.Infrastructure.Repositories
             return await query.ToListAsync();
         }
 
+
+        public async Task<ICollection<TResult>> GetAllProjectedAsync<TResult, TKey>(IProjectedSpecification<TEntity, TResult, TKey> specification)
+        {
+            var query = SpecificationQueryBuilder.GetQuery(_dbSet, specification);
+            return await query.ToListAsync();
+        }
+
         public async Task<TEntity?> GetBySpecificationAsync(ISpecification<TEntity> specification)
         {
             var query = SpecificationQueryBuilder.GetQuery(_dbSet, specification);
             return await query.FirstOrDefaultAsync();
         }
+
 
         public async Task<TEntity?> GetByExpressionAsync(Expression<Func<TEntity, bool>> expression)
         {

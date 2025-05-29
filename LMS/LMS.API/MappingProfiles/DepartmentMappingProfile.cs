@@ -10,7 +10,10 @@ namespace LMS.API.MappingProfiles
         public DepartmentMappingProfile()
         {
             CreateMap<DepartmentRequestDto, CreateDepartmentCommand>();
-            CreateMap<DepartmentRequestDto, UpdateDepartmentCommand>();
+            
+            CreateMap<DepartmentRequestDto, UpdateDepartmentCommand>()
+                .ForMember(dest => dest.DepartmentId, 
+                opt => opt.MapFrom(src => Guid.Empty));
         }
     }
 }

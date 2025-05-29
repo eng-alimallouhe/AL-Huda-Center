@@ -16,10 +16,9 @@ namespace LMS.Domain.Entities.Orders
         //Foreign Key: EmployeeId ==> one(Employee)-to-many(Order) relationship
         public Guid? EmployeeId { get; set; }
 
-        
-        //Foreign Key: DepartmentId ==> one(Department)-to-many(Order) relationship
-        public Guid DepartmentId { get; set; }
 
+        //Foreign Key: EmployeeId ==> one(Employee)-to-many(Order) relationship
+        public Guid DepartmentId { get; set; }
 
         public OrderStatus Status { get; set; }
         public DeliveryMethod DeliveryMethod { get; set; }
@@ -39,7 +38,8 @@ namespace LMS.Domain.Entities.Orders
         //nabigation property:
         public Customer Customer { get; set; }
         public Employee? Employee { get; set; }
-        public Department Department { get; set; }
+        public Department? Department { get; set; }
+
 
         public BaseOrder()
         {
@@ -49,7 +49,6 @@ namespace LMS.Domain.Entities.Orders
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
             Customer = null!;
-            Department = null!;
         }
     }
 }

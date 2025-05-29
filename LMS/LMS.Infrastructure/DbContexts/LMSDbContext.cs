@@ -33,6 +33,7 @@ namespace LMS.Infrastructure.DbContexts
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<DepartmentResponsibility> DepartmentResponsibilities { get; set; }
         public DbSet<EmployeeDepartment> EmployeeDepartments { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<OtpCode> OtpCodes { get; set; }
@@ -92,6 +93,7 @@ namespace LMS.Infrastructure.DbContexts
             modelBuilder.ApplyConfiguration(new EmployeeConfigurations());
             modelBuilder.ApplyConfiguration(new AddressConfigurations());
             modelBuilder.ApplyConfiguration(new DepartmentConfigurations());
+            modelBuilder.ApplyConfiguration(new DepartmentResponsibilityConfigurations());
             modelBuilder.ApplyConfiguration(new EmployeeDepartmentConfigurations());
             modelBuilder.ApplyConfiguration(new OtpConfigurations());
             modelBuilder.ApplyConfiguration(new NotificationConfigurations());

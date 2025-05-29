@@ -23,8 +23,7 @@ namespace LMS.Domain.Entities.Users
 
         //navigation property:
         public ICollection<EmployeeDepartment> EmployeeDepartments { get; set; }
-        public ICollection<BaseOrder> Orders { get; set; }
-
+        public DepartmentResponsibility? Responsibility { get; set; }
 
         public Department()
         {
@@ -33,7 +32,6 @@ namespace LMS.Domain.Entities.Users
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
             EmployeeDepartments = [];
-            Orders = [];
         }
     }
 }
