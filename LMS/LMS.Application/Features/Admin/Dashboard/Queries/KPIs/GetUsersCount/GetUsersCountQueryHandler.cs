@@ -1,5 +1,5 @@
 ﻿using LMS.Application.DTOs.Admin.Dashboard;
-using LMS.Application.Specifications.Admin;
+using LMS.Application.Specifications.Users;
 using LMS.Domain.Abstractions.Repositories;
 using LMS.Domain.Entities.Users;
 using MediatR;
@@ -22,9 +22,9 @@ namespace LMS.Application.Features.Admin.Dashboard.Queries.KPIs.GetUsersCount
 
             return new NumberOfUsersDto
             {
-                NumberOfUsers = users.Count(),
-                NumberOfCustomers = users.Where(user => user.Role.RoleType.ToLower() == "customer").Count(),
-                NumberOfEmployees = users.Where(user => user.Role.RoleType.ToLower() == "employee").Count()
+                NumberOfUsers = users.count,
+                NumberOfCustomers = users.items.Where(user => user.Role.RoleType.ToLower() == "customer").Count(),
+                NumberOfEmployees = users.items.Where(user => user.Role.RoleType.ToLower() == "employee").Count()
             };
         }
     }

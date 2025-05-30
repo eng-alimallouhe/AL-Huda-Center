@@ -1,4 +1,4 @@
-﻿using LMS.Application.Specifications.Admin;
+﻿using LMS.Application.Specifications.Sales;
 using LMS.Domain.Abstractions.Repositories;
 using LMS.Domain.Entities.Stock.Products;
 using MediatR;
@@ -19,7 +19,7 @@ namespace LMS.Application.Features.Admin.Dashboard.Queries.KPIs.GetNewBooksCount
         public async Task<int> Handle(GetNewBooksCountQuery request, CancellationToken cancellationToken)
         {
 
-            return (await _bookRepo.GetAllAsync(new ActiveBookSpecification(request.StartDate))).Count();
+            return (await _bookRepo.GetAllAsync(new ActiveBookSpecification(request.StartDate))).count;
         }
     }
 }

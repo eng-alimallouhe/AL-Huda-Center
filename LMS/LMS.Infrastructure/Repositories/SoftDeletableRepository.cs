@@ -22,10 +22,12 @@ namespace LMS.Infrastructure.Repositories
             _dbSet = context.Set<TEntity>();
         }
         
-        public async Task<ICollection<TEntity>> GetAllAsync(ISpecification<TEntity> specification)
+        public async Task<(ICollection<TEntity> items, int count)> GetAllAsync(ISpecification<TEntity> specification)
         {
-            var query = SpecificationQueryBuilder.GetQuery(_dbSet, specification);
-            return await query.ToListAsync();
+            var count = SpecificationQueryBuilder.GetQuery(_dbSet, specification, false).Count();
+            var query = SpecificationQueryBuilder.GetQuery(_dbSet, specification, true);
+            
+            return (await query.ToListAsync(), count);
         }
 
 
@@ -37,7 +39,7 @@ namespace LMS.Infrastructure.Repositories
 
         public async Task<TEntity?> GetBySpecificationAsync(ISpecification<TEntity> specification)
         {
-            var query = SpecificationQueryBuilder.GetQuery(_dbSet, specification);
+            var query = SpecificationQueryBuilder.GetQuery(_dbSet, specification, true);
             return await query.FirstOrDefaultAsync();
         }
 

@@ -22,12 +22,12 @@ namespace LMS.Application.Features.Admin.Dashboard.Queries.LowStockQuantity
 
         public async Task<ICollection<StockInfromationDto>> Handle(LowStockQuantityQuery request, CancellationToken cancellationToken)
         {
-            var products = await _productRepo.GetAllAsync(new Specification<Product>(
+            var products = (await _productRepo.GetAllAsync(new Specification<Product>(
                 criteria: product => product.ProductStock <= request.MaxQuantity,
                 includes: ["Translations"],
                 orderBy: product => product.ProductStock,
                 tracking: false
-                ));
+                ))).items;
 
             return _mapper.Map<ICollection<StockInfromationDto>>(
                 products,

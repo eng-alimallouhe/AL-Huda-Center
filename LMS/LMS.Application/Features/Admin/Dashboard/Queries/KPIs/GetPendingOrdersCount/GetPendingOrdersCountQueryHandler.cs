@@ -1,4 +1,4 @@
-﻿using LMS.Application.Specifications.Admin;
+﻿using LMS.Application.Specifications.Orders;
 using LMS.Domain.Abstractions.Repositories;
 using LMS.Domain.Entities.Orders;
 using MediatR;
@@ -18,7 +18,7 @@ namespace LMS.Application.Features.Admin.Dashboard.Queries.KPIs.GetPendingOrders
 
         public async Task<int> Handle(GetPendingOrdersCountQuery request, CancellationToken cancellationToken)
         {
-            return (await _baseOrderRepo.GetAllAsync(new PendingOrdersSpecification())).Count();
+            return (await _baseOrderRepo.GetAllAsync(new PendingOrdersSpecification())).count;
         }
     }
 }

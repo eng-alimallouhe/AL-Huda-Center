@@ -26,6 +26,7 @@ namespace LMS.Domain.Entities.Stock.Products
         public ICollection<Discount> Discounts { get; set; }
         public ICollection<InventoryLog> Logs { get; set; }
         public ICollection<CartItem> CartItems { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; }
         public ICollection<ProductTranslation> Translations { get; set; }
 
         
@@ -39,6 +40,7 @@ namespace LMS.Domain.Entities.Stock.Products
             Discounts = [];
             Logs = [];
             CartItems = [];
+            OrderItems = [];
             Translations = [];
         }
     }

@@ -1,4 +1,5 @@
-﻿using LMS.Domain.Enums.Orders;
+﻿using LMS.Domain.Entities.Orders;
+using LMS.Domain.Enums.Orders;
 
 namespace LMS.Application.DTOs.Orders
 {
@@ -8,5 +9,7 @@ namespace LMS.Application.DTOs.Orders
         public OrderStatus Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+
+        public decimal Cost { get; set; }
     }
 }

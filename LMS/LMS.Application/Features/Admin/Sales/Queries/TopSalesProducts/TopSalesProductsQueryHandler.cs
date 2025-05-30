@@ -1,5 +1,5 @@
 ﻿using LMS.Application.DTOs.Admin.Dashboard;
-using LMS.Application.Specifications.Admin;
+using LMS.Application.Specifications.Sales;
 using LMS.Domain.Abstractions.Repositories;
 using LMS.Domain.Entities.Orders;
 using MediatR;

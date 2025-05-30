@@ -1,4 +1,4 @@
-﻿using LMS.Application.Specifications.Admin;
+﻿using LMS.Application.Specifications.Users;
 using LMS.Domain.Abstractions.Repositories;
 using LMS.Domain.Entities.Users;
 using MediatR;
@@ -18,7 +18,7 @@ namespace LMS.Application.Features.Admin.Dashboard.Queries.KPIs.GetNewCustomerNu
 
         public async Task<int> Handle(GetNewCustomerCountQuery request, CancellationToken cancellationToken)
         {
-            return (await _customerRepo.GetAllAsync(new NewCustomersCountSpecification(request.StartDate))).Count();
+            return (await _customerRepo.GetAllAsync(new NewCustomersCountSpecification(request.StartDate))).count;
         }
     }
 }

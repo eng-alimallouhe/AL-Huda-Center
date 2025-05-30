@@ -28,10 +28,14 @@ namespace LMS.API.Controllers.Admin
         }
 
 
-        [HttpGet("get-all-departments")]
-        public async Task<ActionResult<ICollection<DepartmentOverviewDto>>> GetAll()
+        [HttpGet("get-all-departments/{pageNumber:int}/{pageSize:int}")]
+        public async Task<ActionResult<ICollection<DepartmentOverviewDto>>> GetAll(int pageNumber, int pageSize)
         {
-            var response = await _mediator.Send(new GetAllDepartmentsQuery());
+            if (pageNumber < 1|| pageSize < 1)
+            {
+                return BadRequest();
+            }
+            var response = await _mediator.Send(new GetAllDepartmentsQuery(pageSize, pageNumber));
 
             return Ok(response);
         }

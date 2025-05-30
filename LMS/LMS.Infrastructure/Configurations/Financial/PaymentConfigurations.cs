@@ -16,11 +16,21 @@ namespace LMS.Infrastructure.Configurations.Financial
             builder.Property(p => p.Date)
                     .IsRequired();
 
+
+            builder.Property(p => p.EmployeeId)
+                    .IsRequired();
+
             builder.Property(p => p.Amount)
                     .HasColumnType("decimal(19, 2)");
 
             builder.Property(p => p.IsActive)
                     .IsRequired();
+
+            builder.HasOne(p => p.Employee)
+                .WithMany()
+                .HasForeignKey(p => p.EmployeeId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

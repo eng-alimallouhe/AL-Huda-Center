@@ -2,7 +2,6 @@
 using LMS.Application.Abstractions.Services.Admin;
 using LMS.Application.DTOs.Admin.Departments;
 using LMS.Application.DTOs.Admin.Employees;
-using LMS.Application.DTOs.Orders;
 using LMS.Domain.Abstractions.Repositories;
 using LMS.Domain.Abstractions.Specifications;
 using LMS.Domain.Entities.Users;
@@ -34,8 +33,9 @@ namespace LMS.Infrastructure.Services.Admin
                 includes: ["Employee"]
                 ));
 
-            var activeEmployees = empDeps.Where(empDeps => empDeps.IsActive).Select(empDeps => empDeps.Employee);
-            var inActiveEmployees = empDeps.Where(empDeps => !empDeps.IsActive).Select(empDeps => empDeps.Employee);
+            var activeEmployees = empDeps.items.Where(empDeps => empDeps.IsActive).Select(empDeps => empDeps.Employee);
+            
+            var inActiveEmployees = empDeps.items.Where(empDeps => !empDeps.IsActive).Select(empDeps => empDeps.Employee);
 
             departmentDetails.CurrentEmployees = _mapper.Map<ICollection<EmployeeOverviewDto>>(activeEmployees);
             departmentDetails.FormerEmployees = _mapper.Map<ICollection<EmployeeOverviewDto>>(inActiveEmployees);

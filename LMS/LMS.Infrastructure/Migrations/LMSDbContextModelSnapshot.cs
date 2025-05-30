@@ -183,6 +183,9 @@ namespace LMS.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -191,6 +194,8 @@ namespace LMS.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PaymentId");
+
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Payments", (string)null);
                 });
@@ -1489,6 +1494,17 @@ namespace LMS.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("LoyaltyLevel");
+                });
+
+            modelBuilder.Entity("LMS.Domain.Entities.Financial.Payment", b =>
+                {
+                    b.HasOne("LMS.Domain.Entities.Users.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("LMS.Domain.Entities.HR.Attendance", b =>
