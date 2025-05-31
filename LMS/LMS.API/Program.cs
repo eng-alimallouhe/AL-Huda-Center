@@ -179,6 +179,8 @@ internal class Program
         builder.Services.AddHttpClient<IImageUploader, ImageUploader>();
         builder.Services.AddHttpClient<IImageAuthService, ImageAuthService>();
         builder.Services.AddScoped<IApiImageUploadHelper, ApiImageUploadHelper>();
+        builder.Services.AddScoped<IExcelReportGeneratorHelper, ExcelReportGeneratorHelper>();
+
 
         //Domain Services:
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

@@ -1,5 +1,4 @@
-﻿using LMS.Domain.Entities.Financial;
-using LMS.Domain.Enums.Finacial;
+﻿using LMS.Domain.Enums.Finacial;
 
 namespace LMS.Application.DTOs.Admin.Financial
 {

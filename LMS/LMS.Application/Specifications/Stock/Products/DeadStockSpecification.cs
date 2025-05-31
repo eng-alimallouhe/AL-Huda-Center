@@ -26,20 +26,24 @@ namespace LMS.Application.Specifications.Stock.Products
 
         public DeadStockSpecification(
             DateTime from,
-            int pageNumber,
-            int pageSize)
+            int? pageNumber,
+            int? pageSize)
         {
             _from = from;
 
-            if (pageNumber < 1 || pageSize < 1)
+            if (pageNumber.HasValue && pageSize.HasValue)
             {
-                Skip = pageNumber;
-                Take = pageSize;
-            }
-            else
-            {
-                Skip = pageNumber;
-                Take = pageSize;
+
+                if (pageNumber < 1 || pageSize < 1)
+                {
+                    Skip = 1;
+                    Take = 10;
+                }
+                else
+                {
+                    Skip = pageNumber;
+                    Take = pageSize;
+                }
             }
         }
     }

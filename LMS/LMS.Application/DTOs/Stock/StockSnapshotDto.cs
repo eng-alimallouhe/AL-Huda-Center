@@ -6,7 +6,7 @@
         public string ProductName { get; set; }  
         public int ProductStock { get; set; }        
         public decimal ProductPrice { get; set; }   
-        public decimal TotalValue { get; set; }  
+        public decimal TotalValue => ProductPrice * ProductStock;  
         public DateTime UpdatedAt { get; set; }
         public int LogsCount { get; set; }
     }

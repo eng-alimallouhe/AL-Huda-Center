@@ -22,18 +22,26 @@ namespace LMS.Application.Specifications.Stock.Products
         public int? Take { get; }
 
         public StockSnapshotSpecification(
-            int pageNumber,
-            int pageSize)
+            int? pageNumber,
+            int? pageSize)
         {
-            if (pageNumber < 1 || pageSize < 1)
+            if (pageNumber.HasValue && pageSize.HasValue)
             {
-                Skip = 1;
-                Take = 1;
+                if (pageNumber < 1 || pageSize < 1)
+                {
+                    Skip = 1;
+                    Take = 1;
+                }
+                else
+                {
+                    Skip = pageNumber.Value;
+                    Take = pageSize.Value;
+                }
             }
             else
             {
-                Skip = pageNumber;
-                Take = pageSize;
+                Skip = null;
+                Take = null;
             }
         }
     }
