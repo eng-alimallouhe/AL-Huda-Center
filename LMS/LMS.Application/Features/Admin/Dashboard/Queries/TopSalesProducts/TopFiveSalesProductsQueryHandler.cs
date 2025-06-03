@@ -1,24 +1,22 @@
-﻿using LMS.Application.DTOs.Admin.Dashboard;
-using LMS.Application.Specifications.Sales;
-using LMS.Domain.Abstractions.Repositories;
-using LMS.Domain.Entities.Orders;
+﻿using LMS.Application.Abstractions.Services.Admin;
+using LMS.Application.DTOs.Admin.Dashboard;
 using MediatR;
 
 namespace LMS.Application.Features.Admin.Dashboard.Queries.TopFiveSalesProducts
 {
     public class TopFiveSalesProductsQueryHandler : IRequestHandler<TopFiveSalesProductsQuery, ICollection<TopSellingProductDto>>
     {
-        private readonly ISoftDeletableRepository<OrderItem> _orderItemsRepo;
+        private readonly IDashboardHelper _dashboardHelper;
 
         public TopFiveSalesProductsQueryHandler(
-            ISoftDeletableRepository<OrderItem> orderItemsRepo)
+            IDashboardHelper dashboardHelper)
         {
-            _orderItemsRepo = orderItemsRepo;
+            _dashboardHelper = dashboardHelper;
         }
 
         public async Task<ICollection<TopSellingProductDto>> Handle(TopFiveSalesProductsQuery request, CancellationToken cancellationToken)
         {
-            return await _orderItemsRepo.GetAllProjectedAsync(new TopSellingProductsSpecification(5, request.Language));
+            return await _dashboardHelper.GetTopSellingProducts(5, request.Language);
         }
     }
 }

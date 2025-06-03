@@ -23,8 +23,7 @@ namespace LMS.Application.Features.Admin.Departments.Queries.GetDepartmentById
         public async Task<DepartmentDetailsDTO?> Handle(GetDepartmentByIdQuery request, CancellationToken cancellationToken)
         {
             var department = await _departmentRepo.GetBySpecificationAsync(new Specification<Department>(
-                criteria: department => department.DepartmentId == request.Id,
-                includes: ["OrderType.Orders"]
+                criteria: department => department.DepartmentId == request.Id
                 ));
 
             if (department is null)

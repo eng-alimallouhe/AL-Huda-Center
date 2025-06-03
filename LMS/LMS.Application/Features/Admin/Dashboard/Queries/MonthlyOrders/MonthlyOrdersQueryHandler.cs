@@ -1,24 +1,22 @@
-﻿using LMS.Application.DTOs.Admin.Dashboard;
-using LMS.Application.Specifications.Orders;
-using LMS.Domain.Abstractions.Repositories;
-using LMS.Domain.Entities.Orders;
+﻿using LMS.Application.Abstractions.Services.Admin;
+using LMS.Application.DTOs.Admin.Dashboard;
 using MediatR;
 
 namespace LMS.Application.Features.Admin.Dashboard.Queries.MonthlyOrders
 {
     public class MonthlyOrdersQueryHandler : IRequestHandler<MonthlyOrdersQuery, ICollection<MonthlyOrdersDto>>
     {
-        private readonly ISoftDeletableRepository<BaseOrder> _baseOrderRepo;
+        private readonly IDashboardHelper _dashboradHelper;
 
         public MonthlyOrdersQueryHandler(
-            ISoftDeletableRepository<BaseOrder> baseOrderRepo)
+            IDashboardHelper dashboradHelper)
         {
-            _baseOrderRepo = baseOrderRepo;
+            _dashboradHelper = dashboradHelper;
         }
 
         public async Task<ICollection<MonthlyOrdersDto>> Handle(MonthlyOrdersQuery request, CancellationToken cancellationToken)
         {
-            return await _baseOrderRepo.GetAllProjectedAsync(new MonthlyOrdersSpecification(request.From, request.To));
+            return await _dashboradHelper.GetMonthlyOrders(request.From, request.To);
         }
     }
 }

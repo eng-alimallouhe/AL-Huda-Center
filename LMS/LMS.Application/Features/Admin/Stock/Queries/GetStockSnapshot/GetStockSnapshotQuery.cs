@@ -6,7 +6,7 @@ using MediatR;
 namespace LMS.Application.Features.Admin.Stock.Queries.GetStockSnapshot
 {
     public record GetStockSnapshotQuery(
+        Language Language,
         int PageNumber,
-        int PageSize,
-        Language Language): IRequest<PagedResult<StockInfromationDto>>;
+        int PageSize): IRequest<PagedResult<StockInfromationDto>>;
 }

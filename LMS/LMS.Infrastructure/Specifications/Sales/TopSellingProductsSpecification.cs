@@ -1,13 +1,17 @@
 ﻿using System.Linq.Expressions;
+using DocumentFormat.OpenXml.Wordprocessing;
 using LMS.Application.DTOs.Admin.Dashboard;
 using LMS.Domain.Abstractions.Specifications;
 using LMS.Domain.Entities.Orders;
 using LMS.Domain.Enums.Commons;
 
-namespace LMS.Application.Specifications.Sales
+namespace LMS.Infrastructure.Specifications.Sales
 {
     public class TopSellingProductsSpecification : IProjectedSpecification<OrderItem, TopSellingProductDto, Guid>
     {
+        private readonly Language _language;
+
+
         public Expression<Func<OrderItem, bool>>? Criteria => null;
 
         public List<string> Includes => new()
@@ -25,9 +29,6 @@ namespace LMS.Application.Specifications.Sales
 
         public int? Take { get; }
 
-        Language Language;
-
-
 
         // ← Group by ProductId
         public Expression<Func<OrderItem, Guid>> GroupBy => oi => oi.ProductId;
@@ -38,7 +39,11 @@ namespace LMS.Application.Specifications.Sales
             group => new TopSellingProductDto
             {
                 ProductId = group.Key,
-                ProductName = group.Select(x => x.Product.Translations.Where(pt => pt.Language == Language).FirstOrDefault()!.ProductName ?? "N/A").FirstOrDefault()!,
+                ProductName = group
+                .SelectMany(x => x.Product.Translations
+                        .Where(t => t.Language == _language))
+                    .Select(t => t.ProductName)
+                    .FirstOrDefault() ?? "N/A",
                 TotalSold = group.Sum(x => x.Quantity)
             };
 
@@ -48,7 +53,7 @@ namespace LMS.Application.Specifications.Sales
 
         public TopSellingProductsSpecification(int topCount, Language language)
         {
-            Language = language;
+            _language = language;
             Take = topCount;
         }
     }

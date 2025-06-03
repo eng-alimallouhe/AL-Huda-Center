@@ -1,5 +1,6 @@
 ﻿using LMS.Domain.Entities.Orders;
 using LMS.Domain.Entities.Stock.Categories;
+using LMS.Domain.Entities.Stock.PublicEntities;
 namespace LMS.Domain.Entities.Stock.Products
 {
     public class    Product
@@ -22,7 +23,7 @@ namespace LMS.Domain.Entities.Stock.Products
 
 
         // Navigation property:
-        public ICollection<Category> Categories { get; set; }
+        public ICollection<ProductCategory> ProductCategoriys { get; set; }
         public ICollection<Discount> Discounts { get; set; }
         public ICollection<InventoryLog> Logs { get; set; }
         public ICollection<CartItem> CartItems { get; set; }
@@ -36,7 +37,7 @@ namespace LMS.Domain.Entities.Stock.Products
             IsActive = true;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
-            Categories = [];
+            ProductCategoriys = [];
             Discounts = [];
             Logs = [];
             CartItems = [];

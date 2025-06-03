@@ -49,6 +49,10 @@
         DEPARTMENT_NOT_FOUNDED,
         EXISTING_APPOINTMENT,
         USED_REPOSNSIBILITY,
-        SAME_DETAIL // when the new department reponsibilty is same old 
+        SAME_DETAIL, // when the new department reponsibilty is same old 
+
+
+        //
+        UNVALIDE_PARAMETERS // when the request has a wrong parameters
     }
 }

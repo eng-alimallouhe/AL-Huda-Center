@@ -30,7 +30,6 @@ namespace LMS.Infrastructure.Configurations.Orders
             builder.Property(po => po.FileName)
                     .HasMaxLength(256)
                     .IsRequired();
-
         }
     }
 }

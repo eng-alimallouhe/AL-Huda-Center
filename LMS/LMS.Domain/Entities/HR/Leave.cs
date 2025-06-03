@@ -17,9 +17,14 @@ namespace LMS.Domain.Entities.HR
         public DateTime EndDate { get; set; }
         public LeaveType LeaveType { get; set; }
         public required string Reason { get; set; }
+        public bool IsAproved { get; set; }
 
         //Soft Delete
         public bool IsActive { get; set; }
+
+
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
         //Navigation Property:
         public Employee Employee { get; set; }
@@ -29,6 +34,8 @@ namespace LMS.Domain.Entities.HR
             LeaveId = Guid.NewGuid();
             IsActive = true;
             Employee = null!;
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
         }
     }
 }

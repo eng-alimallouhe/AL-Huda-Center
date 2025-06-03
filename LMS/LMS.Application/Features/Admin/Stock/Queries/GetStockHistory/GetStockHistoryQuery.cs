@@ -6,7 +6,7 @@ using MediatR;
 namespace LMS.Application.Features.Admin.Stock.Queries.GetStockHistory
 {
     public record GetStockHistoryQuery(
+        Language Language = Language.EN,
         int PageNumber = 0,
-        int PageSize = 20, 
-        Language Language = Language.EN) : IRequest<PagedResult<InventoryLogDetailsDto>>;
+        int PageSize = 20) : IRequest<PagedResult<InventoryLogDetailsDto>>;
 }

@@ -11,6 +11,7 @@ using LMS.Application.Features.Admin.Employees.Queries.GetAllGetAllEmployees;
 using LMS.Application.Features.Admin.Employees.Queries.GetEmployeeById;
 using LMS.Common.Enums;
 using LMS.Common.Results;
+using LMS.Domain.Enums.Commons;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,23 +23,18 @@ namespace LMS.API.Controllers.Admin
     {
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
-        private readonly IImageUploader _imageUploader;
-        private readonly IConfiguration _configuration;
         private readonly IApiImageUploadHelper _uploadHelper;
 
         public EmployeeController(
             IMapper mapper,
             IMediator mediator,
-            IImageUploader imageUploader,
-            IConfiguration configuration,
             IApiImageUploadHelper uploadHelper)
         {
             _mapper = mapper;
             _mediator = mediator;
-            _imageUploader = imageUploader;
-            _configuration = configuration;
             _uploadHelper = uploadHelper;
         }
+
 
 
         [HttpGet("get-all-employees")]
@@ -51,12 +47,14 @@ namespace LMS.API.Controllers.Admin
 
 
         [HttpGet("get-employee/{id:guid}")]
-        public async Task<ActionResult<ICollection<EmployeeOverviewDto>>> GetEmployeeById(Guid id)
+        public async Task<ActionResult<EmployeeDetailsDto>> GetEmployeeById(Guid id, [FromQuery] Language language)
         {
-            var response = await _mediator.Send(new GetEmployeeByIdQuery(id));
+            var response = await _mediator.Send(new GetEmployeeByIdQuery(id, language));
 
             return response is null? NotFound() : Ok(response);
         }
+
+
 
 
         [HttpPost("add-employee")]
@@ -84,6 +82,8 @@ namespace LMS.API.Controllers.Admin
         }
 
 
+        
+        
         [HttpPost("transfer-employee")]
         public async Task<ActionResult<Result>> TransferEmployee([FromForm]TransferEmployeeRequestDto request)
         {
@@ -113,6 +113,8 @@ namespace LMS.API.Controllers.Admin
             return response.IsSuccess ? Ok(response) : BadRequest(response);
         }
 
+        
+        
         [HttpPost("update-employee/{id:guid}")]
         public async Task<ActionResult<Result>> UpdateEmployee(Guid id, [FromBody]EmployeeUpdateRequestDto request)
         {
@@ -124,6 +126,7 @@ namespace LMS.API.Controllers.Admin
 
             return response.IsSuccess ? NoContent() : NotFound(response);
         }
+
 
 
         [HttpDelete("delete-employee/{id:guid}")]

@@ -1,4 +1,5 @@
 ﻿using LMS.Domain.Entities.Stock.Products;
+using LMS.Domain.Entities.Stock.PublicEntities;
 
 namespace LMS.Domain.Entities.Stock.Categories
 {
@@ -18,7 +19,7 @@ namespace LMS.Domain.Entities.Stock.Categories
 
 
         //Navigation Property:
-        public ICollection<Product> Products { get; set; }
+        public ICollection<ProductCategory> ProductCategoriys { get; set; }
         public ICollection<CategoryTranslation> Translations { get; set; }
 
 
@@ -28,7 +29,7 @@ namespace LMS.Domain.Entities.Stock.Categories
             IsActive = true; 
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
-            Products = [];
+            ProductCategoriys = [];
             Translations = [];
         }
     }

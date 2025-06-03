@@ -91,6 +91,7 @@ namespace LMS.Infrastructure.Services.Helpers
         {
             using var workbook = new XLWorkbook();
 
+
             var sheet = workbook.Worksheets.Add("Stock Snapshot");
 
 
@@ -153,7 +154,7 @@ namespace LMS.Infrastructure.Services.Helpers
             sheet.Cell(1, 1).Value = "Product Name";
             sheet.Cell(1, 2).Value = "Quantity";
             sheet.Cell(1, 3).Value = "Unit Price";
-            sheet.Cell(1, 4).Value = "Created At";
+            sheet.Cell(1, 4).Value = "Adding Date";
             sheet.Cell(1, 5).Value = "Total Value";
 
             int row = 2;

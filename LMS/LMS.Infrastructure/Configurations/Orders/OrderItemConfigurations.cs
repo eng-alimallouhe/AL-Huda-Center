@@ -41,7 +41,8 @@ namespace LMS.Infrastructure.Configurations.Orders
             
             builder.HasOne(oi => oi.Product)
                     .WithMany()
-                    .HasForeignKey(oi => oi.ProductId);
+                    .HasForeignKey(oi => oi.ProductId)
+                    .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

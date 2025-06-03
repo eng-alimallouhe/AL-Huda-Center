@@ -9,7 +9,7 @@ namespace LMS.Application.Specifications.Users
         public Expression<Func<Customer, bool>>? Criteria =>   
             customer => !customer.IsDeleted;
 
-        public List<string> Includes => ["FinancialRevenues"];
+        public List<string> Includes => ["Orders"];
 
         public bool IsTrackingEnabled => false;
 

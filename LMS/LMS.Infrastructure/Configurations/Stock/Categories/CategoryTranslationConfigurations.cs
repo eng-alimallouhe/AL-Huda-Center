@@ -10,7 +10,7 @@ namespace LMS.Infrastructure.Configurations.Stock.Categories
     {
         public void Configure(EntityTypeBuilder<CategoryTranslation> builder)
         {
-            builder.ToTable("CateofyTranslations");
+            builder.ToTable("CategoryTranslations");
 
             builder.HasKey(a => a.TranslationId);
 

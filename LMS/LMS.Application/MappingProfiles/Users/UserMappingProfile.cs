@@ -15,7 +15,7 @@ namespace LMS.Application.MappingProfiles.Users
 
             CreateMap<Customer, CustomersOverViewDto>()
                 .ForMember(dest => dest.TotalAmountSpent, 
-                opt => opt.MapFrom(src => src.FinancialRevenues.Sum(fr => fr.Amount)));
+                opt => opt.MapFrom(src => src.Orders.Sum(fr => fr.Cost)));
 
 
             CreateMap<Customer, InActiveCustomersDto>()

@@ -12,9 +12,10 @@ namespace LMS.Domain.Entities.HR
         public Guid EmployeeId { get; set; }
 
         public DateTime Date { get; set; }
-        public DateTime TimeIn { get; set; }
-        public DateTime TimeOut { get; set; }
+        public TimeSpan? TimeIn { get; set; }
+        public TimeSpan? TimeOut { get; set; }
         public bool? IsHoliday { get; set; }
+
 
         //Soft Delete
 

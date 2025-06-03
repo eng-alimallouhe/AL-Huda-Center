@@ -1,5 +1,6 @@
 ﻿using LMS.Domain.Entities.Stock.Authors;
 using LMS.Domain.Entities.Stock.Genres;
+using LMS.Domain.Entities.Stock.PublicEntities;
 using LMS.Domain.Entities.Stock.Publishers;
 
 namespace LMS.Domain.Entities.Stock.Products
@@ -17,16 +18,16 @@ namespace LMS.Domain.Entities.Stock.Products
 
 
         //Navigation Property:
-        public ICollection<Publisher> Publishers { get; set; }
-        public ICollection<Genre> Genres { get; set; }
+        public ICollection<PublisherBook> PublisherBooks { get; set; }
+        public ICollection<GenreBook> GenreBooks { get; set; }
         public Author Author { get; set; }
 
 
         public Book()
         {
             Author = null!;
-            Publishers = [];
-            Genres = [];
+            PublisherBooks = [];
+            GenreBooks = [];
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace LMS.Domain.Entities.Orders
 {
-    public class PrintOrder : Order
+    public class PrintOrder : BaseOrder
     {
         public int StartPage { get; set; }
         public int EndPage { get; set; }

@@ -22,51 +22,6 @@ namespace LMS.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BookGenre", b =>
-                {
-                    b.Property<Guid>("BooksProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("GenresGenreId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("BooksProductId", "GenresGenreId");
-
-                    b.HasIndex("GenresGenreId");
-
-                    b.ToTable("BooksGenres", (string)null);
-                });
-
-            modelBuilder.Entity("BookPublisher", b =>
-                {
-                    b.Property<Guid>("BooksProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("PublishersPublisherId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("BooksProductId", "PublishersPublisherId");
-
-                    b.HasIndex("PublishersPublisherId");
-
-                    b.ToTable("BooksPublishers", (string)null);
-                });
-
-            modelBuilder.Entity("CategoryProduct", b =>
-                {
-                    b.Property<Guid>("CategoriesCategoryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProductsProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CategoriesCategoryId", "ProductsProductId");
-
-                    b.HasIndex("ProductsProductId");
-
-                    b.ToTable("CategoryProduct");
-                });
-
             modelBuilder.Entity("LMS.Domain.Entities.Financial.FinancialRevenue", b =>
                 {
                     b.Property<Guid>("FinancialRevenueId")
@@ -275,6 +230,9 @@ namespace LMS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
@@ -282,6 +240,9 @@ namespace LMS.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAproved")
                         .HasColumnType("bit");
 
                     b.Property<int>("LeaveType")
@@ -293,6 +254,9 @@ namespace LMS.Infrastructure.Migrations
                         .HasColumnType("nvarchar(512)");
 
                     b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("LeaveId");
@@ -355,6 +319,9 @@ namespace LMS.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeducted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Reason")
@@ -549,6 +516,9 @@ namespace LMS.Infrastructure.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("ProductId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -566,6 +536,8 @@ namespace LMS.Infrastructure.Migrations
                     b.HasIndex("DiscountId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("ProductId1");
 
                     b.HasIndex("SellOrderId");
 
@@ -667,7 +639,7 @@ namespace LMS.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("CateofyTranslations", (string)null);
+                    b.ToTable("CategoryTranslations", (string)null);
                 });
 
             modelBuilder.Entity("LMS.Domain.Entities.Stock.Discount", b =>
@@ -837,6 +809,69 @@ namespace LMS.Infrastructure.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductTranslations", (string)null);
+                });
+
+            modelBuilder.Entity("LMS.Domain.Entities.Stock.PublicEntities.GenreBook", b =>
+                {
+                    b.Property<Guid>("GenreBookId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BookId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("GenreId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("GenreBookId");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("GenreId");
+
+                    b.ToTable("GenresBooks", (string)null);
+                });
+
+            modelBuilder.Entity("LMS.Domain.Entities.Stock.PublicEntities.ProductCategory", b =>
+                {
+                    b.Property<Guid>("ProductCategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ProductCategoryId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductsCategories", (string)null);
+                });
+
+            modelBuilder.Entity("LMS.Domain.Entities.Stock.PublicEntities.PublisherBook", b =>
+                {
+                    b.Property<Guid>("PublisherBookId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BookId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PublisherId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PublisherBookId");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("PublisherId");
+
+                    b.ToTable("PublishersBooks", (string)null);
                 });
 
             modelBuilder.Entity("LMS.Domain.Entities.Stock.Publishers.Publisher", b =>
@@ -1324,6 +1359,35 @@ namespace LMS.Infrastructure.Migrations
                     b.ToTable("Orders", (string)null);
                 });
 
+            modelBuilder.Entity("LMS.Domain.Entities.Orders.PrintOrder", b =>
+                {
+                    b.HasBaseType("LMS.Domain.Entities.Orders.BaseOrder");
+
+                    b.Property<int>("CopiesCount")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("CopyCost")
+                        .HasColumnType("decimal(7, 2)");
+
+                    b.Property<int>("EndPage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("FileUrl")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<int>("StartPage")
+                        .HasColumnType("int");
+
+                    b.ToTable("PrintOrders", (string)null);
+                });
+
             modelBuilder.Entity("LMS.Domain.Entities.Stock.Products.Book", b =>
                 {
                     b.HasBaseType("LMS.Domain.Entities.Stock.Products.Product");
@@ -1378,35 +1442,6 @@ namespace LMS.Infrastructure.Migrations
                     b.ToTable("Employees", (string)null);
                 });
 
-            modelBuilder.Entity("LMS.Domain.Entities.Orders.PrintOrder", b =>
-                {
-                    b.HasBaseType("LMS.Domain.Entities.Orders.Order");
-
-                    b.Property<int>("CopiesCount")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("CopyCost")
-                        .HasColumnType("decimal(7, 2)");
-
-                    b.Property<int>("EndPage")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("FileUrl")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<int>("StartPage")
-                        .HasColumnType("int");
-
-                    b.ToTable("PrintOrders", (string)null);
-                });
-
             modelBuilder.Entity("LMS.Domain.Entities.Orders.Shipment", b =>
                 {
                     b.HasBaseType("LMS.Domain.Entities.Orders.Order");
@@ -1419,51 +1454,6 @@ namespace LMS.Infrastructure.Migrations
                         .HasFilter("[AddressId] IS NOT NULL");
 
                     b.ToTable("Shipment", (string)null);
-                });
-
-            modelBuilder.Entity("BookGenre", b =>
-                {
-                    b.HasOne("LMS.Domain.Entities.Stock.Products.Book", null)
-                        .WithMany()
-                        .HasForeignKey("BooksProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LMS.Domain.Entities.Stock.Genres.Genre", null)
-                        .WithMany()
-                        .HasForeignKey("GenresGenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BookPublisher", b =>
-                {
-                    b.HasOne("LMS.Domain.Entities.Stock.Products.Book", null)
-                        .WithMany()
-                        .HasForeignKey("BooksProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LMS.Domain.Entities.Stock.Publishers.Publisher", null)
-                        .WithMany()
-                        .HasForeignKey("PublishersPublisherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CategoryProduct", b =>
-                {
-                    b.HasOne("LMS.Domain.Entities.Stock.Categories.Category", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LMS.Domain.Entities.Stock.Products.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("LMS.Domain.Entities.Financial.FinancialRevenue", b =>
@@ -1648,6 +1638,10 @@ namespace LMS.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("LMS.Domain.Entities.Stock.Products.Product", null)
+                        .WithMany("OrderItems")
+                        .HasForeignKey("ProductId1");
+
                     b.HasOne("LMS.Domain.Entities.Orders.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("SellOrderId")
@@ -1725,6 +1719,63 @@ namespace LMS.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("LMS.Domain.Entities.Stock.PublicEntities.GenreBook", b =>
+                {
+                    b.HasOne("LMS.Domain.Entities.Stock.Products.Book", "Book")
+                        .WithMany("GenreBooks")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LMS.Domain.Entities.Stock.Genres.Genre", "Genre")
+                        .WithMany("GenreBooks")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("LMS.Domain.Entities.Stock.PublicEntities.ProductCategory", b =>
+                {
+                    b.HasOne("LMS.Domain.Entities.Stock.Categories.Category", "Category")
+                        .WithMany("ProductCategoriys")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LMS.Domain.Entities.Stock.Products.Product", "Product")
+                        .WithMany("ProductCategoriys")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("LMS.Domain.Entities.Stock.PublicEntities.PublisherBook", b =>
+                {
+                    b.HasOne("LMS.Domain.Entities.Stock.Products.Book", "Book")
+                        .WithMany("PublisherBooks")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LMS.Domain.Entities.Stock.Publishers.Publisher", "Publisher")
+                        .WithMany("PublisherBooks")
+                        .HasForeignKey("PublisherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Publisher");
                 });
 
             modelBuilder.Entity("LMS.Domain.Entities.Stock.Publishers.PublisherTranslation", b =>
@@ -1833,6 +1884,15 @@ namespace LMS.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("LMS.Domain.Entities.Orders.PrintOrder", b =>
+                {
+                    b.HasOne("LMS.Domain.Entities.Orders.BaseOrder", null)
+                        .WithOne()
+                        .HasForeignKey("LMS.Domain.Entities.Orders.PrintOrder", "OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("LMS.Domain.Entities.Stock.Products.Book", b =>
                 {
                     b.HasOne("LMS.Domain.Entities.Stock.Authors.Author", "Author")
@@ -1866,15 +1926,6 @@ namespace LMS.Infrastructure.Migrations
                     b.HasOne("LMS.Domain.Entities.Users.User", null)
                         .WithOne()
                         .HasForeignKey("LMS.Domain.Entities.Users.Employee", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("LMS.Domain.Entities.Orders.PrintOrder", b =>
-                {
-                    b.HasOne("LMS.Domain.Entities.Orders.Order", null)
-                        .WithOne()
-                        .HasForeignKey("LMS.Domain.Entities.Orders.PrintOrder", "OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1917,11 +1968,15 @@ namespace LMS.Infrastructure.Migrations
 
             modelBuilder.Entity("LMS.Domain.Entities.Stock.Categories.Category", b =>
                 {
+                    b.Navigation("ProductCategoriys");
+
                     b.Navigation("Translations");
                 });
 
             modelBuilder.Entity("LMS.Domain.Entities.Stock.Genres.Genre", b =>
                 {
+                    b.Navigation("GenreBooks");
+
                     b.Navigation("Translations");
                 });
 
@@ -1933,11 +1988,17 @@ namespace LMS.Infrastructure.Migrations
 
                     b.Navigation("Logs");
 
+                    b.Navigation("OrderItems");
+
+                    b.Navigation("ProductCategoriys");
+
                     b.Navigation("Translations");
                 });
 
             modelBuilder.Entity("LMS.Domain.Entities.Stock.Publishers.Publisher", b =>
                 {
+                    b.Navigation("PublisherBooks");
+
                     b.Navigation("Translations");
                 });
 
@@ -1967,6 +2028,13 @@ namespace LMS.Infrastructure.Migrations
             modelBuilder.Entity("LMS.Domain.Entities.Orders.Order", b =>
                 {
                     b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("LMS.Domain.Entities.Stock.Products.Book", b =>
+                {
+                    b.Navigation("GenreBooks");
+
+                    b.Navigation("PublisherBooks");
                 });
 
             modelBuilder.Entity("LMS.Domain.Entities.Users.Customer", b =>

@@ -25,12 +25,6 @@ namespace LMS.Infrastructure.Configurations.Stock.Products
             builder.Property(b => b.PublishedYear)
                     .IsRequired();
 
-            builder.HasMany(b => b.Genres)
-                    .WithMany(g => g.Books)
-                    .UsingEntity(j =>
-                    {
-                        j.ToTable("BooksGenres");
-                    });
 
             builder.HasOne(b => b.Author)
                     .WithMany(a => a.Books)

@@ -34,6 +34,8 @@ namespace LMS.Infrastructure.Repositories
         public async Task<ICollection<TResult>> GetAllProjectedAsync<TResult, TKey>(IProjectedSpecification<TEntity, TResult, TKey> specification)
         {
             var query = SpecificationQueryBuilder.GetQuery(_dbSet, specification);
+            Console.WriteLine(specification.Take);
+            Console.WriteLine(specification.Skip);
             return await query.ToListAsync();
         }
 

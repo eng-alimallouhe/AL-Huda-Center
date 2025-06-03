@@ -18,7 +18,8 @@ namespace LMS.Application.Features.Admin.Dashboard.Queries.KPIs.GetPendingOrders
 
         public async Task<int> Handle(GetPendingOrdersCountQuery request, CancellationToken cancellationToken)
         {
-            return (await _baseOrderRepo.GetAllAsync(new PendingOrdersSpecification())).count;
+            var response = await _baseOrderRepo.GetAllAsync(new PendingOrdersSpecification());
+            return (response).count;
         }
     }
 }

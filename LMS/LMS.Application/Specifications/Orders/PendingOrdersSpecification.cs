@@ -6,8 +6,7 @@ namespace LMS.Application.Specifications.Orders
 {
     public class PendingOrdersSpecification : ISpecification<BaseOrder>
     {
-        public Expression<Func<BaseOrder, bool>>? Criteria => 
-            order => order.Status == Domain.Enums.Orders.OrderStatus.Pending;
+        public Expression<Func<BaseOrder, bool>>? Criteria { get;  }
 
         public List<string> Includes => [];
 
@@ -21,5 +20,10 @@ namespace LMS.Application.Specifications.Orders
         public int? Skip => null;
 
         public int? Take => null;
+
+        public PendingOrdersSpecification()
+        {
+            Criteria = order => order.Status == Domain.Enums.Orders.OrderStatus.Pending;
+        }
     }
 }

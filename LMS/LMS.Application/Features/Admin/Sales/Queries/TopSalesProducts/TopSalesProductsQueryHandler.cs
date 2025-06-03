@@ -1,4 +1,5 @@
-﻿using LMS.Application.DTOs.Admin.Dashboard;
+﻿using LMS.Application.Abstractions.Services.Admin;
+using LMS.Application.DTOs.Admin.Dashboard;
 using LMS.Application.Specifications.Sales;
 using LMS.Domain.Abstractions.Repositories;
 using LMS.Domain.Entities.Orders;
@@ -8,17 +9,17 @@ namespace LMS.Application.Features.Admin.Sales.Queries.TopSalesProducts
 {
     public class TopSalesProductsQueryHandler : IRequestHandler<TopSalesProductsQuery, ICollection<TopSellingProductDto>>
     {
-        private readonly ISoftDeletableRepository<OrderItem> _orderItemsRepo;
+        private readonly IDashboardHelper _dashboradHelper;
 
         public TopSalesProductsQueryHandler(
-            ISoftDeletableRepository<OrderItem> orderItemsRepo)
+            IDashboardHelper dashboardHelper)
         {
-            _orderItemsRepo = orderItemsRepo;
+            _dashboradHelper = dashboardHelper;
         }
 
         public async Task<ICollection<TopSellingProductDto>> Handle(TopSalesProductsQuery request, CancellationToken cancellationToken)
         {
-            return await _orderItemsRepo.GetAllProjectedAsync(new TopSellingProductsSpecification(request.Number, request.Language));
+            return await _dashboradHelper.GetTopSellingProducts(request.Number, request.Language);
         }
     }
 }

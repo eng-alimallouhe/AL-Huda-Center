@@ -22,10 +22,6 @@ namespace LMS.Infrastructure.Configurations.Stock.Publishers
 
             builder.Property(p => p.UpdatedAt)
                     .IsRequired();
-
-            builder.HasMany(p => p.Books)
-                    .WithMany(b => b.Publishers)
-                    .UsingEntity(j => j.ToTable("BooksPublishers"));
         }
     }
 }

@@ -180,6 +180,8 @@ internal class Program
         builder.Services.AddHttpClient<IImageAuthService, ImageAuthService>();
         builder.Services.AddScoped<IApiImageUploadHelper, ApiImageUploadHelper>();
         builder.Services.AddScoped<IExcelReportGeneratorHelper, ExcelReportGeneratorHelper>();
+        builder.Services.AddScoped<IDashboardHelper, DashboardHelper>();
+        builder.Services.AddScoped<ISalesHelper, Saleshelper>();
 
 
         //Domain Services:

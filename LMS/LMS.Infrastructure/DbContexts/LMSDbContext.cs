@@ -21,6 +21,8 @@ using LMS.Infrastructure.Configurations.Financial.Levels;
 using Microsoft.EntityFrameworkCore;
 using LMS.Infrastructure.Configurations.Stock.Categories;
 using LMS.Domain.Entities.HttpEntities;
+using LMS.Domain.Entities.Stock.PublicEntities;
+using LMS.Infrastructure.Configurations.Stock.PublicEntities;
 
 namespace LMS.Infrastructure.DbContexts
 {
@@ -60,6 +62,7 @@ namespace LMS.Infrastructure.DbContexts
 
         // Stock Namespace
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductCategory> ProductsCategories { get; set; }
         public DbSet<ProductTranslation> ProductTranslations { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<GenreTranslation> GenreTranslations { get; set; }
@@ -68,6 +71,8 @@ namespace LMS.Infrastructure.DbContexts
         public DbSet<Author> Authors { get; set; }
         public DbSet<AuthorTranslation> AuthorTranslations { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<GenreBook> GenreBooks { get; set; }
+        public DbSet<PublisherBook> PublisherBooks { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<InventoryLog> InventoryLogs { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
@@ -109,8 +114,11 @@ namespace LMS.Infrastructure.DbContexts
             modelBuilder.ApplyConfiguration(new PublisherConfigurations());
             modelBuilder.ApplyConfiguration(new PublisherTranslationConfigurations());
             modelBuilder.ApplyConfiguration(new ProductConfigurations());
+            modelBuilder.ApplyConfiguration(new ProductCategoryConfigurations());
             modelBuilder.ApplyConfiguration(new ProductTranslationConfigurations());
             modelBuilder.ApplyConfiguration(new BookConfigurations());
+            modelBuilder.ApplyConfiguration(new GenreBookConfigurations());
+            modelBuilder.ApplyConfiguration(new PublisherBookConfigurations());
             modelBuilder.ApplyConfiguration(new AuthorConfigurations());
             modelBuilder.ApplyConfiguration(new AuthorTranslationConfigurations());
             modelBuilder.ApplyConfiguration(new CategoryConfigurations());

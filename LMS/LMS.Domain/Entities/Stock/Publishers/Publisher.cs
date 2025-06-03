@@ -1,4 +1,5 @@
 ﻿using LMS.Domain.Entities.Stock.Products;
+using LMS.Domain.Entities.Stock.PublicEntities;
 
 namespace LMS.Domain.Entities.Stock.Publishers
 {
@@ -18,7 +19,7 @@ namespace LMS.Domain.Entities.Stock.Publishers
 
 
         // Navigation property:
-        public ICollection<Book> Books { get; set; }
+        public ICollection<PublisherBook> PublisherBooks { get; set; }
         public ICollection<PublisherTranslation> Translations { get; set; }
 
 
@@ -28,7 +29,7 @@ namespace LMS.Domain.Entities.Stock.Publishers
             IsActive = true;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
-            Books = new List<Book>();
+            PublisherBooks = [];
             Translations = [];
         }
     }

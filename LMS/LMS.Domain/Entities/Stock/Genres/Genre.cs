@@ -1,4 +1,5 @@
 ﻿using LMS.Domain.Entities.Stock.Products;
+using LMS.Domain.Entities.Stock.PublicEntities;
 
 namespace LMS.Domain.Entities.Stock.Genres
 {
@@ -18,7 +19,7 @@ namespace LMS.Domain.Entities.Stock.Genres
 
 
         // Navigation property:
-        public ICollection<Book> Books { get; set; }
+        public ICollection<GenreBook> GenreBooks { get; set; }
         public ICollection<GenreTranslation> Translations { get; set; }
 
 
@@ -28,7 +29,7 @@ namespace LMS.Domain.Entities.Stock.Genres
             IsActive = true;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
-            Books = [];
+            GenreBooks = [];
             Translations = [];
         }
     }

@@ -1,5 +1,4 @@
-﻿using LMS.Domain.Entities.Orders;
-using LMS.Domain.Enums.Orders;
+﻿using LMS.Domain.Enums.Orders;
 
 namespace LMS.Application.DTOs.Orders
 {

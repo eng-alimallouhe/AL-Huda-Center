@@ -16,9 +16,10 @@ namespace LMS.Domain.Entities.HR
         public string DecisionFileUrl { get; set; } = string.Empty;
         public string Reason { get; set; } = string.Empty;
         public DateTime Date { get; set; }
+        public bool IsDeducted { get; set; }
 
-        
         //Soft delete
+
         public bool IsActive { get; set; } 
 
         
