@@ -1,25 +1,5 @@
-| العمود الأول | العمود الثاني | العمود الثالث |
-|--------------|--------------|---------------|
-| قيمة 1       | قيمة 2       | قيمة 3        |
-| قيمة 4       | قيمة 5       | قيمة 6        |
-
-
-
-### مثال لكود Java:
-
-```md
-```java
-Scanner sc = new Scanner(System.in);
-System.out.println("Hello World");
-```
-
-`text`
-
-
-
 # 🚀Syrian Developers Network 
 
----
 
 ## 💡 About the project 
 - this project is a Full-Stack Web Application designed as a professional newtwork platform. It provides users with personalized profiles, a space to share ideas and problems, specialized communities for various interests, and a dedicated job posting/application system with integrated resume building.
