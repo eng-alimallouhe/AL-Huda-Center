@@ -56,17 +56,11 @@ The application is deployed as a single, unified codebase (Monolithic Architectu
 
 ## 📂 Project Structure
 The solution is divided into the following layers, adhering to Clean Architecture principles:
-
     * **Domain Layer**: Contains enterprise-wide business rules, entities, and interfaces (the core of the application).
-
     * **Infrastructure Layer**: Contains implementation details for external dependencies (e.g., EF Core implementation, SQL Server connectivity, third-party service integration like Elasticsearch).
-
     * **Application Layer**: Contains application-specific business rules, command/query handlers, and DTOs. It orchestrates the flow between the Domain and Infrastructure layers.
-
     * **API Layer (Presentation)**: The entry point of the backend application, typically handling HTTP requests and utilizing the Application layer.
-
     * **Common Layer**: Contains shared utilities, exceptions, and helpers used across multiple layers.
-
     * **UI Layer (Angular Layer)**: The client-side application responsible for the presentation and user interaction.
 
 ## ⚙️ Getting Started
@@ -77,115 +71,13 @@ The solution is divided into the following layers, adhering to Clean Architectur
 
 * SQL Server Instance
 
-* Docker Desktop
+* Docler Desktop
 
-
-### 1. Repository Installation 
-
+### Installation
 1. Clone the repository: 
-
-```bash
-cd path/to/any/folder
-```
-* then 
-
-```bash
-git clone "https://github.com/eng-alimallouhe/Syrian-Developers-Network-SPN-.git"
+```md
+```powershell
+cd C:\MyProjects
+git clone "repo-link"
 ```
 
-### 2. Docker Setup 
-we use Docker Desktop to run Kibana, Elastic and Redis 
-follow this steps to setup docker environment
-
-    1. Install Docker Desktop Application 
-    2. navigat to Docker Folder in the cloned repository, in this folder you will find file with name: **docker-compose.yml** if you could not find it create a new one then paste this code in it: 
-    ```Json 
-      services:
-  elasticsearch:
-    image: elasticsearch:8.13.4
-    container_name: elasticsearch
-    environment:
-      - discovery.type=single-node
-      - ES_JAVA_OPTS=-Xms1g -Xmx1g
-      - xpack.security.enabled=false
-    ports:
-      - "9200:9200"
-    networks:
-      - elk
-
-  kibana:
-    image: kibana:8.13.4
-    container_name: kibana
-    depends_on:
-      - elasticsearch
-    ports:
-      - "5601:5601"
-    environment:
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-    networks:
-      - elk
-
-  redis:
-    image: redis:7
-    container_name: redis
-    ports:
-      - "6379:6379"
-    networks:
-      - backend
-
-  redis-insight:
-    image: redis/redis-stack:latest
-    container_name: redis-insight
-    ports:
-      - "8001:8001"
-    networks:
-      - backend
-
-networks:
-  elk:
-  backend:
-
-    ```
-
-### 2. Backend Setup
-
-#### Install Dependencies
-
-- Navigate to the Backend folder and run the following command to install required dependencies:
-- open the prject folder in CMD then write this command:
-```bash
-dotnet restore
-```
-
-#### Configure Database
-
-- Update the appsettings.json file in the Backend project with your database connection string.
-- Run the Application
-```bash
-dotnet run
-```
-
-- The backend API will be running at http://localhost:5000.
-
-### 3. Frontend Setup
-
-#### Install Dependencies
-
-- Navigate to the Frontend folder and install the required Angular dependencies:
-- open the UI folder in CMD then write this comman:
-```bash
-npm install
-```
-
-#### Run the Application
-
-- To run the Angular application locally:
-```bash
-ng serve
-```
-or 
-```bash
-npm start
-```
-
-- The frontend will be running at http://localhost:4200
