@@ -34,3 +34,29 @@
 | 🔗 ORM          | EF Core        | Data access abstraction. |
 | ⚡ Real-time     | SignalR        | Real-time functionality. |
 | 🔍 Search       | Elasticsearch  | Search + ranking. |
+
+
+<table>
+  <tr>
+    <th style="padding: 10px; text-align: left;">Category</th>
+    <th style="padding: 10px; text-align: left;">Technology</th>
+    <th style="padding: 10px; text-align: left;">Description</th>
+  </tr>
+
+  <tr>
+    <td>Backend</td>
+    <td>.NET Platform</td>
+    <td>Primary framework for the business logic and API layer.</td>
+  </tr>
+  <tr>
+    <td>Frontend</td>
+    <td>Angular</td>
+    <td>SPA framework for the user interface.</td>
+  </tr>
+  <tr>
+    <td>Language</td>
+    <td>TypeScript / C#</td>
+    <td>Primary programming languages.</td>
+  </tr>
+</table>
+
