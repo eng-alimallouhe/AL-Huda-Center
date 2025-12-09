@@ -56,12 +56,13 @@ The application is deployed as a single, unified codebase (Monolithic Architectu
 
 ## 📂 Project Structure
 The solution is divided into the following layers, adhering to Clean Architecture principles:
-    * **Domain Layer**: Contains enterprise-wide business rules, entities, and interfaces (the core of the application).
-    * **Infrastructure Layer**: Contains implementation details for external dependencies (e.g., EF Core implementation, SQL Server connectivity, third-party service integration like Elasticsearch).
-    * **Application Layer**: Contains application-specific business rules, command/query handlers, and DTOs. It orchestrates the flow between the Domain and Infrastructure layers.
-    * **API Layer (Presentation)**: The entry point of the backend application, typically handling HTTP requests and utilizing the Application layer.
-    * **Common Layer**: Contains shared utilities, exceptions, and helpers used across multiple layers.
-    * **UI Layer (Angular Layer)**: The client-side application responsible for the presentation and user interaction.
+
+    - **Domain Layer**: Contains enterprise-wide business rules, entities, and interfaces (the core of the application).
+    - **Infrastructure Layer**: Contains implementation details for external dependencies (e.g., EF Core implementation, SQL Server connectivity, third-party service integration like Elasticsearch).
+    - **Application Layer**: Contains application-specific business rules, command/query handlers, and DTOs. It orchestrates the flow between the Domain and Infrastructure layers.
+    - **API Layer (Presentation)**: The entry point of the backend application, typically handling HTTP requests and utilizing the Application layer.
+    - **Common Layer**: Contains shared utilities, exceptions, and helpers used across multiple layers.
+    - **UI Layer (Angular Layer)**: The client-side application responsible for the presentation and user interaction.
 
 ## ⚙️ Getting Started
 ### Prerequisites
