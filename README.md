@@ -81,9 +81,9 @@ The solution is divided into the following layers, adhering to Clean Architectur
 
 ### Installation
 1. Clone the repository: 
-```bash
- cd path/to/any/folder
- git clone "https://github.com/eng-alimallouhe/Syrian-Developers-Network-SPN-.git"
-
+```md
+```powershell
+cd C:\MyProjects
+git clone "repo-link"
 ```
 
