@@ -23,14 +23,14 @@
     * Project Exhibition: for each user there is a Exhibition for the user can share his projects and get rating and suggests and can invite a other user to collaborate the project.
 
 ## 🛠️ Technology Stack
-* this project is built using the following core technologies: 
+- this project is built using the following core technologies: 
 
-| Category | Technology | Description | 
-|:----:|:----:|:------:| 
-| Backend	| .NET Platform	| Primary framework for the business logic and API layer. | 
-| Frontend | Angular	| Single Page Application (SPA) framework for the User Interface. | 
-| Language |	TypeScript / C# | Primary programming languages. | 
-| Database	| SQL Server	| Relational Database Management System. | 
-| ORM |	EF Core (Entity Framework Core) |	Object-Relational Mapper for data access. | 
-| Real-time	| SignalR	Library | for adding real-time web functionality. | 
-| Search Engine	| Elasticsearch	| Used for boosting search performance and implementing Feed Ranker logic. | 
+| **Category**   | **Technology** | **Description** |
+|----------------|----------------|-----------------|
+| 🖥️ Backend      | .NET Platform  | Business logic & API. |
+| 🎨 Frontend     | Angular        | SPA UI framework. |
+| 💻 Language     | TypeScript / C#| Main programming languages. |
+| 🗄️ Database     | SQL Server     | Relational DBMS. |
+| 🔗 ORM          | EF Core        | Data access abstraction. |
+| ⚡ Real-time     | SignalR        | Real-time functionality. |
+| 🔍 Search       | Elasticsearch  | Search + ranking. |
