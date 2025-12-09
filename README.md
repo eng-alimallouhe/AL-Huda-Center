@@ -35,28 +35,55 @@
 | ⚡ Real-time     | SignalR        | Real-time functionality. |
 | 🔍 Search       | Elasticsearch  | Search + ranking. |
 
+### 📦 Key .NET Libraries
+- AutoMapper: Used for object-to-object mapping.
+- EmailKit (or similar): Used for handling email functionality.
+- EF packages: the libraries that used to set th EF Core in the environment and do migrations 
+- SMS Sender Library
 
-<table>
-  <tr>
-    <th style="padding: 10px; text-align: left;">Category</th>
-    <th style="padding: 10px; text-align: left;">Technology</th>
-    <th style="padding: 10px; text-align: left;">Description</th>
-  </tr>
+## 🏗️ Architecture & Patterns 
 
-  <tr>
-    <td>Backend</td>
-    <td>.NET Platform</td>
-    <td>Primary framework for the business logic and API layer.</td>
-  </tr>
-  <tr>
-    <td>Frontend</td>
-    <td>Angular</td>
-    <td>SPA framework for the user interface.</td>
-  </tr>
-  <tr>
-    <td>Language</td>
-    <td>TypeScript / C#</td>
-    <td>Primary programming languages.</td>
-  </tr>
-</table>
+#### Clean Architecture
+The project follows the principles of Clean Architecture to create independent, testable, and maintainable layers.
+
+### Monolithic Architecture
+The application is deployed as a single, unified codebase (Monolithic Architecture).
+
+### Design Patterns
+* Repositories Pattern: Abstracts the data access logic, making the application independent of the specific data source.
+
+* Specifications Pattern: Used to encapsulate query logic and reusability, often in conjunction with the Repository Pattern.
+
+## 📂 Project Structure
+The solution is divided into the following layers, adhering to Clean Architecture principles:
+
+    * **Domain Layer**: Contains enterprise-wide business rules, entities, and interfaces (the core of the application).
+
+    * **Infrastructure Layer**: Contains implementation details for external dependencies (e.g., EF Core implementation, SQL Server connectivity, third-party service integration like Elasticsearch).
+
+    * **Application Layer**: Contains application-specific business rules, command/query handlers, and DTOs. It orchestrates the flow between the Domain and Infrastructure layers.
+
+    * **API Layer (Presentation)**: The entry point of the backend application, typically handling HTTP requests and utilizing the Application layer.
+
+    * **Common Layer**: Contains shared utilities, exceptions, and helpers used across multiple layers.
+
+    * **UI Layer (Angular Layer)**: The client-side application responsible for the presentation and user interaction.
+
+## ⚙️ Getting Started
+### Prerequisites
+* .NET SDK (Specific Version)
+
+* Node.js & npm (Specific Version)
+
+* SQL Server Instance
+
+* Docler Desktop
+
+### Installation
+1. Clone the repository: 
+```bash
+ cd path/to/any/folder
+ git clone "https://github.com/eng-alimallouhe/Syrian-Developers-Network-SPN-.git"
+
+```
 
