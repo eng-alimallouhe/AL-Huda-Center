@@ -10,9 +10,9 @@
 ## ✨ Features
 1. User and & his Own Profile
 
-  * Customizable Profile: the user can customize his profile by filling his informations like name, BIO, his skills and professional details.
+    * Customizable Profile: the user can customize his profile by filling his informations like name, BIO, his skills and professional details.
 
-  * Built-in Resume Builder: user can create up to 5 or 6 customized Resumes withtin the platform, he can choose the style/language and save or export them as `PDF`. 
+    * Built-in Resume Builder: user can create up to 5 or 6 customized Resumes withtin the platform, he can choose the style/language and save or export them as `PDF`. 
 
 2. 📢 Social & Content Sharing
 
@@ -20,5 +20,5 @@
 
     * Q&A: when you code you almost will see a bug so you can share this bug in Q&A space and the other users can suggest them solutions then you mark one solution as the best solution.
 
-  * Project Exhibition: for each user there is a Exhibition for the user can share his projects and get rating and suggests and can invite a other user to collaborate the project.
+    * Project Exhibition: for each user there is a Exhibition for the user can share his projects and get rating and suggests and can invite a other user to collaborate the project.
 
