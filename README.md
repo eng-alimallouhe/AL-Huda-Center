@@ -16,9 +16,9 @@
 
 2. 📢 Social & Content Sharing
 
-  ** Ideas Space: users can share them ideas or life issues by posting the issue and thay can interact with another post to share them opinions.
+    * Ideas Space: users can share them ideas or life issues by posting the issue and thay can interact with another post to share them opinions.
 
-  ** Q&A: when you code you almost will see a bug so you can share this bug in Q&A space and the other users can suggest them solutions then you mark one solution as the best solution.
+    * Q&A: when you code you almost will see a bug so you can share this bug in Q&A space and the other users can suggest them solutions then you mark one solution as the best solution.
 
-  ** Project Exhibition: for each user there is a Exhibition for the user can share his projects and get rating and suggests and can invite a other user to collaborate the project.
+  * Project Exhibition: for each user there is a Exhibition for the user can share his projects and get rating and suggests and can invite a other user to collaborate the project.
 
