@@ -2,3 +2,12 @@
 |--------------|--------------|---------------|
 | قيمة 1       | قيمة 2       | قيمة 3        |
 | قيمة 4       | قيمة 5       | قيمة 6        |
+
+
+
+### مثال لكود Java:
+
+```md
+```java
+Scanner sc = new Scanner(System.in);
+System.out.println("Hello World");
